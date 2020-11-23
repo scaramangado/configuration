@@ -283,11 +283,20 @@ end)
 --- }}}
 
 -- {{{ Helper function for quitmenu
+
+function hibernate()
+	awful.spawn.with_shell(apps.default.lock .. " & systemctl hibernate")
+end
+
+function suspend()
+	awful.spawn.with_shell(apps.default.lock .. " & systemctl suspend")
+end
+
 myquitmenu = {
 	{ "Shutdown", "systemctl poweroff", menubar.utils.lookup_icon("xfsm-shutdown") },
 	{ "Reboot", "systemctl reboot", menubar.utils.lookup_icon("xfsm-reboot") },
-	{ "Hibernate", apps.default.lock .. " & systemctl hibernate", menubar.utils.lookup_icon("xfsm-hibernate") },
-	{ "Suspend", apps.default.lock .. " & systemctl suspend", menubar.utils.lookup_icon("xfsm-suspend") },
+	{ "Hibernate", hibernate, menubar.utils.lookup_icon("xfsm-hibernate") },
+	{ "Suspend", suspend, menubar.utils.lookup_icon("xfsm-suspend") },
 	{ "Log Out", function() awesome.quit() end, menubar.utils.lookup_icon("xfsm-logout") },
 }
 
