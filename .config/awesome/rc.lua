@@ -439,7 +439,7 @@ globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_he
             end
         end,
         { description = "set layout for development", group = "layout" }),
-    awful.key({ modkey, "Control" }, "n",
+    awful.key({ modkey, "Control" }, "r",
         function()
             local t = awful.screen.focused().selected_tag
             t.master_width_factor = 0.5
@@ -462,9 +462,9 @@ globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_he
         { description = "open m", group = "launcher" }),
     awful.key({ modkey, }, "e", function() awful.spawn(apps.default.files) end,
         { description = "open file manager", group = "launcher" }),
-    awful.key({ modkey, }, "m", function() awful.spawn(apps.default.mail) end,
+    awful.key({  }, "XF86Mail", function() awful.spawn(apps.default.mail) end,
         { description = "open mail client", group = "launcher" }),
-    awful.key({ modkey, "Control" }, "r", awesome.restart,
+    awful.key({ modkey, "Control" }, "F5", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Control" }, "w", function() beautiful.wallpaper(nil) end,
 	{ description = "random wallpaper", gourp = "awesome" }),
@@ -521,7 +521,7 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         { description = "toggle fullscreen", group = "client" }),
-    awful.key({ modkey }, "w", function(c) c:kill() end,
+    awful.key({ modkey }, "q", function(c) c:kill() end,
         { description = "close", group = "client" }),
     awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle,
         { description = "toggle floating", group = "client" }),
