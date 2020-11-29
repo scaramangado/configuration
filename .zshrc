@@ -89,6 +89,7 @@ alias l="ls -lh"
 alias sudo="sudo "
 alias scp="scp -T"
 alias bat="batcat"
+alias open="xdg-open"
 
 # Git
 
