@@ -5,7 +5,7 @@ configuration {
 }
 
 * {
-	background-color:            #2b2b2b;
+	background-color:            #232323;
 	text-color:                  #a9b7c6;
 	selbg:                       #a9b7c6;
 	actbg:                       #a9b7c6;
@@ -36,12 +36,13 @@ configuration {
 }
 
 window {
-	location:	 west;
-	anchor:		 west;
-	height:		 100%;
+	location:	 south west;
+	anchor:		 south west;
+	height:		 2100px;
 	width:		 22%;
 	orientation: horizontal;
 	children:	 [mainbox];
+	margin-top: 60px;
 }
 
 mainbox {
