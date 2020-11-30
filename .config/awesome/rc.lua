@@ -75,6 +75,14 @@ local function size(table)
     return count
 end
 
+local function set_polybar_visible(visible)
+	if visible then
+		awful.spawn.with_shell("polybar-msg cmd show")
+	else 
+		awful.spawn.with_shell("polybar-msg cmd hide")
+	end
+end
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(os.getenv('HOME') .. "/.config/awesome/themes/default/theme.lua")
@@ -201,77 +209,6 @@ awful.screen.connect_for_each_screen(function(s)
                 selected = i == 1
             })
     end
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(awful.button({}, 1, function() awful.layout.inc(1) end),
-        awful.button({}, 3, function() awful.layout.inc(-1) end)))
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen = s,
-        filter = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons,
-        layout = wibox.layout.fixed.horizontal,
-        widget_template = {
-            {
-                {
-                    {
-                        {
-                            id = 'icon_role',
-                            widget = wibox.widget.imagebox,
-                            layout = wibox.layout.align.center,
-                        },
-		                top = dpi(6),
-		                bottom = dpi(4),
-		                left = dpi(9),
-                        right = dpi(9),
-                        widget = wibox.container.margin
-                    },
-                    wibox.widget.base.make_widget(),
-                    id = 'background_role',
-                    widget = wibox.container.background
-    
-                },
-                nil,
-                layout = wibox.layout.align.vertical,
-            },
-            right = dpi(5),
-            widget = wibox.container.margin
-        }
-    }
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({
-        position = "top",
-        screen = s,
-        bg = beautiful.menu_bg_normal,
-        height = dpi(30)
-    })
-
-    -- Add widgets to the wibox
-
-    local side_widget_width = dpi(600)
-
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        expand = "none",
-        {
-            -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-        },
-        calender_widget,
-        {
-            -- Right widgets
-            layout = wibox.layout.align.horizontal,
-            systray,
-            --s.mylayoutbox,
-        },
-    }
 end)
 -- }}}
 
@@ -502,16 +439,15 @@ globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_he
 clientkeys = gears.table.join(
     awful.key({ modkey, }, "f", function(c)
             local clients = awful.screen.focused().selected_tag:clients()
-	    local menubar = awful.screen.focused().mywibox
 	    if c.fullscreen then
-                c.fullscreen = false
-		menubar.visible = true
+				c.fullscreen = false
+				set_polybar_visible(true)
 		for _, client in pairs(clients) do
 		    client.hidden = false
 		end
             else
 	        c.fullscreen = true
-		menubar.visible = false
+					set_polybar_visible(false)
 		for _, client in pairs(clients) do
 		    if client ~= c then
 		        client.hidden = true
@@ -615,9 +551,14 @@ awful.rules.rules = {
             keys = clientkeys,
             buttons = clientbuttons,
             screen = awful.screen.preferred,
-            placement = awful.placement.no_overlap + awful.placement.no_offscreen--,
+            placement = awful.placement.no_overlap + awful.placement.no_offscreen,
         }
     },
+
+		{ rule = { class = "Polybar" },
+			properties = { border_width = 0,
+										 focusable = false,
+									   x = 0, y = 0 }},	 
 
     { rule = { name = "Discord" },
       properties = { tag = awful.screen.focused().tags[2],
@@ -666,7 +607,7 @@ local function update_menubar_visibility(screen)
     for _, c in pairs(clients) do
         if c.fullscreen then fullscreen = true end
     end
-    awful.screen.focused().mywibox.visible = not fullscreen
+    set_polybar_visible(not fullscreen)
 end
 
 screen.connect_signal("tag::history::update", update_menubar_visibility)

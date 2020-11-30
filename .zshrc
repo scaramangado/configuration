@@ -4,7 +4,7 @@ alias config='git --git-dir=$HOME/.config-repo/ --work-tree=$HOME'
 ### BASE SETUP
 
 bindkey -e
-PATH=/sbin:/usr/sbin:~/.local/bin:$PATH
+PATH=/usr/local/texlive/2020/bin/x86_64-linux:/sbin:/usr/sbin:~/.local/bin:$PATH
 
 # Theme
 
@@ -89,7 +89,11 @@ alias l="ls -lh"
 alias sudo="sudo "
 alias scp="scp -T"
 alias bat="batcat"
-alias open="xdg-open"
+#alias open="xdg-open"
+
+open() {
+	xdg-open $@ > /dev/null 2>&1 &|
+}
 
 # Git
 
