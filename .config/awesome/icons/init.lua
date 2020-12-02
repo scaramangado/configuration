@@ -1,12 +1,10 @@
 local dir = os.getenv('HOME') .. '/.config/awesome/icons'
 
 return {
-  debian = dir .. '/debian.svg',
-  code   = dir .. '/code.svg',
-  social = dir .. '/discord.svg',
-  chrome = dir .. '/globe.svg',
-  game   = dir .. '/game.svg',
-  mail   = dir .. '/mail.svg',
-  music  = dir .. '/music.svg'
+  restart   = dir .. '/restart.svg',
+  power     = dir .. '/power.svg',
+  suspend   = dir .. '/suspend.svg',
+  hibernate = dir .. '/hibernate.svg',
+  logout    = dir .. '/logout.svg'
 }
 
