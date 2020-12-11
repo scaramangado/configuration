@@ -591,3 +591,10 @@ do
 end
 -- }}}
 
+-- Hide polybar tray when client uses built-in fullscreen
+client.connect_signal("request::geometry", function(c, context, ...)
+    if context == "fullscreen" then
+        update_menubar_visibility(c.screen)
+    end
+end)
+
