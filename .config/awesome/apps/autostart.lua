@@ -4,7 +4,8 @@ return {
 		"numlockx on",
 		"jetbrains-toolbox --minimize",
 		"blueman-tray",
-		"nextcloud"
+		"nextcloud",
+		"keepassxc"
 	},
 	shell = {
 		"killall compton ; compton",
