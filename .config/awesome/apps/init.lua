@@ -9,7 +9,8 @@ local apps_config = {
 		mail = "thunderbird",
 		music = "flatpak run com.spotify.Client",
 		lock = "i3lock -i .config/awesome/wallpapers/outset_day.png",
-		password = "keepassxc"
+		password = "keepassxc",
+		calculator = "flatpak run org.gnome.Calculator"
 	},
 	autostart = require("apps.autostart")
 }
@@ -23,6 +24,7 @@ if user_apps then
 	if user_apps.music then apps_config.default.music = user_apps.music end
 	if user_apps.lock then apps_config.default.lock = user_apps.lock end
 	if user_apps.password then apps_config.default.password = user_apps.password end
+	if user_apps.calculator then apps_config.default.calculator = user_apps.calculator end
 end
 
 return apps_config

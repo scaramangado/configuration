@@ -364,6 +364,8 @@ globalkeys = gears.table.join(
         { description = "open file manager", group = "launcher" }),
     awful.key({  }, "XF86Mail", function() awful.spawn(apps.default.mail) end,
         { description = "open mail client", group = "launcher" }),
+    awful.key({  }, "XF86Calculator", function() awful.spawn(apps.default.calculator) end,
+        { description = "open calculator", group = "launcher" }),
     awful.key({ modkey, "Control" }, "F5", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Control" }, "w", function() beautiful.wallpaper(nil) end,
@@ -396,11 +398,7 @@ globalkeys = gears.table.join(
 		awful.key({ }, "XF86AudioNext", function() awful.spawn("playerctl next") end,
 				{ description = "Next", group = "media" }),
 		awful.key({ }, "XF86AudioPrev", function() awful.spawn("playerctl previous") end,
-				{ description = "Previous", group = "media" }),
-		
-		-- Simulated commands
-		awful.key({ "Mod5" }, ",", function() awful.spawn.with_shell("sleep 0.1; xdotool keyup Super_L keydown Alt key comma keyup Alt") end,
-			{ description="test", group = "test" })
+				{ description = "Previous", group = "media" })
 				)
 
 clientkeys = gears.table.join(
@@ -546,6 +544,13 @@ awful.rules.rules = {
 		{ rule = { class = "thunderbird" },
 			properties = { tag = awful.screen.focused().tags[5],
                      focus = false }
+		},
+
+		{ rule = { class = "Gnome-calculator" },
+			properties = { floating = true },
+			callback = function (c)
+				awful.placement.centered(c,nil)
+			end
 		},
 }
 
