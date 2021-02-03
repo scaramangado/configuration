@@ -89,7 +89,8 @@ alias l="ls -lh"
 alias sudo="sudo "
 alias scp="scp -T"
 alias bat="batcat"
-#alias open="xdg-open"
+alias dcup="sudo docker-compose up -d"
+alias dcdown="sudo docker-compose down"
 
 open() {
 	xdg-open $@ > /dev/null 2>&1 &|
@@ -103,8 +104,12 @@ source ~/.git-flow-completion.zsh
 
 alias java8="/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64/bin/java"
 alias java11="/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java"
-alias java14="/usr/lib/jvm/adoptopenjdk-14-hotspot-amd64/bin/java"
+alias java15="/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64/bin/java"
 alias java-version="sudo update-alternatives --config java"
+
+# TheFuck
+
+eval $(thefuck --alias)
 
 # Syntax Highlighting
 
