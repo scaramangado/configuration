@@ -69,6 +69,7 @@ setopt multios
 setopt prompt_subst
 source /etc/zsh_command_not_found
 alias ls="ls --color=auto"
+alias reset-bluetooth="[ \$(pgrep 'blu.*tray' | wc -l) -gt 1 ] && pgrep -o 'blu.*tray' | xargs kill ||:"
 
 ### BASE SETUP END
 
