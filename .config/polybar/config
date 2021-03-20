@@ -1,4 +1,4 @@
-[bar/status]
+[bar/Debian]
 fixed-center = true
 font-0 = Roboto:size=10:weight=bold;5
 font-1 = Hack NF:size=20;11
@@ -8,7 +8,7 @@ dpi-x = 192
 dpi-y = 192
 height = 60
 line-size = 5
-modules-left = rofi ewmh
+modules-left = rofideb ewmh
 modules-center = date
 modules-right = cpu
 tray-position = right
@@ -16,15 +16,39 @@ tray-maxsize = 40
 tray-offset-y = 0
 enable-ipc = true
 
+[bar/Arch]
+fixed-center = true
+font-0 = Roboto:size=10:weight=bold;5
+font-1 = Hack NF:size=20;11
+background = #232323
+foreground = #e5e5e5
+dpi-x = 192
+dpi-y = 192
+height = 60
+line-size = 5
+modules-left = rofiarch ewmh
+modules-center = date
+modules-right = cpu
+tray-position = right
+tray-maxsize = 40
+tray-offset-y = 0
+enable-ipc = true
 [module/date]
 type = internal/date
 interval = 0.5
 date = %a, %B %e  %H:%M
 
-[module/rofi]
+[module/rofideb]
 type = custom/text
 content = 
 content-foreground = #d70a53
+content-padding = 3
+click-left = rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun
+
+[module/rofiarch]
+type = custom/text
+content = 
+content-foreground = #1793d1
 content-padding = 3
 click-left = rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun
 
