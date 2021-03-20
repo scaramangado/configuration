@@ -119,5 +119,5 @@ ZSH_HIGHLIGHT_PATTERNS+=('(?)-rf *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
-[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || echo -n
+[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || echo -n
 
