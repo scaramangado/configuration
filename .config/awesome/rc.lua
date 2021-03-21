@@ -548,6 +548,11 @@ awful.rules.rules = {
                      focus = false }
 		},
 
+		{ rule = { class = "Thunderbird" },
+			properties = { tag = awful.screen.focused().tags[5],
+                     focus = false }
+		},
+
 		{ rule = { class = "Gnome-calculator" },
 			properties = { floating = true },
 			callback = function (c)
