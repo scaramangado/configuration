@@ -10,7 +10,7 @@ return {
 		"killall picom ; sleep 0.1 ; picom",
 		"killall pasystray ; pasystray &",
 		"pgrep keepassxc || keepassxc",
-		"pgrep Discord || (sleep 3 && discord --start-minimized)",
+		"GDK_SCALE=1 GDK_DPI_SCALE=1 pgrep Discord || (sleep 3 && discord --start-minimized)",
 		"pgrep nextcloud || nextcloud",
 		-- "while [ true ] ; do echo -n | xsel -n -i ; sleep 0.5 ; done",
 		"nitrogen --random --set-scaled ~/.config/awesome/wallpapers || exit 0",
