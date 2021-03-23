@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cp ~/Dropbox/id_* .
+cp ~/Nextcloud/Documents/ssh/id_* .
 chmod 400 id_*
 
