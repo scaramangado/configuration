@@ -75,6 +75,8 @@ bindkey '^r' history-incremental-search-backward
 setopt multios
 setopt prompt_subst
 [ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
+# sudo pacman -S pkgfile && sudo pkgfile -u
+[ -f /usr/share/doc/pkgfile/command-not-found.zsh ] && source /usr/share/doc/pkgfile/command-not-found.zsh
 alias ls="ls --color=auto"
 alias reset-bluetooth="[ \$(pgrep 'blu.*tray' | wc -l) -gt 1 ] && pgrep -o 'blu.*tray' | xargs kill ||:"
 
