@@ -36,3 +36,12 @@ cursor:
     blinking: Always
   blink_interval: 500
 
+selection:
+  save_to_clipboard: true
+
+key_bindings:
+  - { key: Numpad0, mods: Control, action: ResetFontSize }
+
+mouse_bindings:
+  - { mouse: Middle, action: None }
+
