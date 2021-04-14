@@ -2,6 +2,7 @@
 fixed-center = true
 font-0 = Roboto:size=10:weight=bold;5
 font-1 = Hack NF:size=20;11
+font-2 = Twitter Color Emoji:scale=12;5
 background = #232323
 foreground = #e5e5e5
 dpi-x = 192
@@ -10,7 +11,7 @@ height = 60
 line-size = 5
 modules-left = rofi ewmh
 modules-center = date
-modules-right = cpu
+modules-right = src rtgg cpu
 tray-position = right
 tray-maxsize = 40
 tray-offset-y = 0
@@ -58,4 +59,20 @@ label-empty-padding = 3
 type = custom/script
 exec = sensors 2>/dev/null | awk '/Tdie:.*/ { print substr($2,2) }'
 interval = 5
+
+[module/src]
+type = custom/script
+exec = ~/.config/polybar/src.sh
+exec-if = which jq
+interval = 60
+click-left = xdg-open https://www.speedrun.com/runsawaitingverification
+format-padding = 2
+
+[module/rtgg]
+type = custom/script
+exec = ~/.config/polybar/rtgg.sh
+exec-if = which jq
+interval = 60
+click-left = xdg-open https://racetime.gg/oot
+format-padding = 2
 
