@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 5
+
 URL='https://racetime.gg/oot/races/data'
 
 JSON=$(curl -s $URL)

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 5
+
 MAIN_LB_URL='https://www.speedrun.com/api/v1/runs?status=new&game=j1l9qz1g&max=100'
 EXT_LB_URL='https://www.speedrun.com/api/v1/runs?status=new&game=76rkv4d8&max=100'
 
