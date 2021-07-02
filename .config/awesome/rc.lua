@@ -75,11 +75,11 @@ local function size(table)
     return count
 end
 
-local function set_polybar_visible(visible)
+function set_polybar_visible(visible, screen_name)
 	if visible then
-		awful.spawn.with_shell("polybar-msg cmd show")
+		awful.spawn.with_shell("polybar-msg -p $(cat /tmp/polybar_" .. screen_name .. ".pid) cmd show")
 	else 
-		awful.spawn.with_shell("polybar-msg cmd hide")
+		awful.spawn.with_shell("polybar-msg -p $(cat /tmp/polybar_" .. screen_name .. ".pid) cmd hide")
 	end
 end
 
@@ -166,44 +166,78 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+function screen_name(screen)
+    for key, _ in pairs(screen.outputs) do
+        return key
+    end
+end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
+    s.padding = { top=60, left=0, right=0, bottom=0 }
+
+    local screen_name = screen_name(s)
+
     -- Tags
-    local tags = {
+    local primary_tags = {
         {
-            icon = icons.chrome,
-            type = 'browse'
+            type = 'browse',
+            name = '1_1'
         },
         {
-            icon = icons.social,
             type = 'social',
+            name = '1_2'
         },
         {
-            icon = icons.code,
-            type = 'code'
+            type = 'code',
+            name = '1_3'
         },
 				{
-						icon = icons.game,
 						type = 'gaming',
+            name = '1_4',
 						layout = awful.layout.suit.floating
 				},
 				{
-						icon = icons.mail,
-						type = 'mail'
+						type = 'mail',
+            name = '1_5'
 				},
 				{
-						icon = icons.music,
-						type = 'music'
+						type = 'music',
+            name = '1_6'
 				}
     }
 
+    local secondary_tags = {
+        {
+            type = 'media',
+            name = '2_1'
+        },
+        {
+            type = 'chat',
+            name = '2_2'
+        },
+        {
+            type = 'database',
+            name = '2_3'
+        },
+        {
+            type = 'tinker',
+            name = '2_4'
+        },
+    }
+
+    local tags
+    if screen_name == "DisplayPort-0" then
+        tags = primary_tags
+    else
+        tags = secondary_tags
+    end
+
     for i, tag in pairs(tags) do
-        awful.tag.add(i,
+        awful.tag.add(tag.name or i,
             {
-                icon = tag.icon,
-                icon_only = true,
                 screen = s,
                 layout = tag.layout or awful.layout.layouts[1],
                 selected = i == 1
@@ -412,13 +446,13 @@ clientkeys = gears.table.join(
             local clients = awful.screen.focused().selected_tag:clients()
 	    if c.fullscreen then
 				c.fullscreen = false
-				set_polybar_visible(true)
+				set_polybar_visible(true, screen_name(awful.screen.focused()))
 		for _, client in pairs(clients) do
 		    client.hidden = false
 		end
             else
 	        c.fullscreen = true
-					set_polybar_visible(false)
+					set_polybar_visible(false, screen_name(awful.screen.focused()))
 		for _, client in pairs(clients) do
 		    if client ~= c then
 		        client.hidden = true
@@ -532,11 +566,11 @@ awful.rules.rules = {
 									   x = 0, y = 0 }},	 
 
     { rule = { class = "discord" },
-      properties = { tag = awful.screen.focused().tags[2],
+      properties = { tag = screen.primary.tags[2],
                      focus = false }},
 
     { rule = { class = "Spotify" },
-      properties = { tag = awful.screen.focused().tags[6],
+      properties = { tag = screen.primary.tags[6],
                      focus = true }},
 
     { rule = { class = "jetbrains-idea-ce", name = "win0" },
@@ -548,12 +582,12 @@ awful.rules.rules = {
 	  },
 
 		{ rule = { class = "thunderbird" },
-			properties = { tag = awful.screen.focused().tags[5],
+			properties = { tag = screen.primary.tags[5],
                      focus = false }
 		},
 
 		{ rule = { class = "Thunderbird" },
-			properties = { tag = awful.screen.focused().tags[5],
+			properties = { tag = screen.primary.tags[5],
                      focus = false }
 		},
 
@@ -595,7 +629,7 @@ local function update_menubar_visibility(screen)
     for _, c in pairs(clients) do
         if c.fullscreen then fullscreen = true end
     end
-    set_polybar_visible(not fullscreen)
+    set_polybar_visible(not fullscreen, screen_name(screen))
 end
 
 screen.connect_signal("tag::history::update", update_menubar_visibility)
