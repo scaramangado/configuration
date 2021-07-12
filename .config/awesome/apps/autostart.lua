@@ -10,7 +10,7 @@ return {
 	},
 	shell = {
 		"killall picom ; sleep 0.2 ; picom",
-		"killall pasystray ; pasystray &",
+		"killall pasystray ; sleep 0.5 ; pasystray &",
 		"pgrep keepassxc || keepassxc",
 		"GDK_SCALE=1 GDK_DPI_SCALE=1 pgrep Discord || (sleep 3 && discord --start-minimized)",
 		"pgrep nextcloud || nextcloud",
