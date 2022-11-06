@@ -9,8 +9,6 @@ branch=$(git current-head)
 feature=""
 style="0"
 
-echo $branch
-
 if [[ $branch != "sprint-"* ]] ; then
 	style="1"
 	feature=$(echo -n $branch | sed "s/[^\/]*\///")
@@ -18,9 +16,6 @@ else
 	style="2"
 	feature=$(echo -n $branch | awk -F "-" '{print $3}')
 fi
-
-echo $style
-echo $feature
 
 if [[ $style == "1" ]] ; then
 	git commit -am "$feature $*"
