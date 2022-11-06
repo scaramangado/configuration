@@ -10,6 +10,7 @@ height = 60
 line-size = 5
 modules-left = rofi ewmh
 modules-center = date
+modules-right = cpu
 tray-position = right
 tray-maxsize = 40
 tray-offset-y = 0
@@ -53,4 +54,8 @@ label-occupied-padding = 3
 label-empty = %icon%
 label-empty-padding = 3
 
+[module/cpu]
+type = custom/script
+exec = sensors | awk '/Tdie:.*/ { print substr($2,2) }'
+interval = 5
 
