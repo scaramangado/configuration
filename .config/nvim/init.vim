@@ -33,25 +33,14 @@ set clipboard=unnamedplus
 set nohlsearch
 set incsearch
 
-" Disable arrow keys
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-vnoremap <Left> <nop>
-vnoremap <Right> <nop>
-vnoremap <Up> <nop>
-vnoremap <Down> <nop>
-
-source $HOME/.config/nvim/keymaps.vim
-
 " Plugins
 
-call plug#begin()
+call plug#begin('~/.config/nvim/plugged')
 
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 Plug 'doums/darcula'
+Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'neovim/nvim-lspconfig'
 "Plug 'nvim-lua/completion-nvim'
 
@@ -61,7 +50,6 @@ call plug#end()
 
 "let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-colorscheme darcula
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
 hi CursorLineNr guibg=NONE ctermbg=NONE
@@ -70,4 +58,14 @@ hi Overflow ctermfg=210 guifg=#ff6b68
 match Overflow /\%>119v.*/
 
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
+
+:function! SourceIfExists(file)
+:  if filereadable(expand(a:file))
+:    exe 'source' a:file
+:  endif
+:endfunction
+
+call SourceIfExists("$HOME/.config/nvim/keymaps.vim")
+call SourceIfExists("$HOME/.config/nvim/wsl.vim")
+call SourceIfExists("$HOME/.config/nvim/colorscheme.vim")
 

@@ -3,6 +3,16 @@ nnoremap <F5> :source $MYVIMRC<CR>:echo "Refreshed config"<CR>
 inoremap <F5> <ESC>:source $MYVIMRC<CR>:echo "Refreshed config"<CR>==gi
 vnoremap <F5> <ESC>:source $MYVIMRC<CR>:echo "Refreshed config"<CR>gv=gv
 
+" Disable arrow keys
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+vnoremap <Left> <nop>
+vnoremap <Right> <nop>
+vnoremap <Up> <nop>
+vnoremap <Down> <nop>
+
 " Mode Switching
 nnoremap <C-Space> i
 inoremap <C-Space> <Esc>l

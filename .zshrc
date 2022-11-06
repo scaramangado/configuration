@@ -17,7 +17,7 @@ prompt_status() {
 }
 
 prompt_context() {
-  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname) "
+  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname -s) "
 }
 
 prompt_dir () {
@@ -80,11 +80,13 @@ setopt prompt_subst
 alias ls="ls --color=auto"
 alias reset-bluetooth="[ \$(pgrep 'blu.*tray' | wc -l) -gt 1 ] && pgrep -o 'blu.*tray' | xargs kill ||:"
 
-### BASE SETUP END
-
+# Load addidiotnal configuration
 PRIVATE_CONFIG="$HOME/.config/private"
-
+WORK_CONFIG="$HOME/.config/work"
 [ -f "$PRIVATE_CONFIG/init.zsh" ] && source "$PRIVATE_CONFIG/init.zsh"
+[ -f "$WORK_CONFIG/init.zsh" ] && source "$WORK_CONFIG/init.zsh"
+
+### BASE SETUP END
 
 # Make neovim the default editor
 export EDITOR=/usr/bin/nvim
@@ -96,6 +98,7 @@ alias vimwiki="vim -c ':VimwikiIndex'"
 export TERMINAL_EMULATOR=$(ps -ho comm -p $(ps -ho ppid -p $$))
 [ $TERMINAL_EMULATOR = 'urxvtd' ] && alias clear="echo -ne '\033c'"
 
+# Utils
 eval "$(dircolors ~/.dircolors)"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 alias ll="ls -lAh"
@@ -106,9 +109,23 @@ type batcat >/dev/null 2>&1 && alias bat="batcat"
 alias dcup="sudo docker-compose up -d"
 alias dcdown="sudo docker-compose down"
 
+function ef() {
+	$EDITOR $(fdfind --type f | fzf)
+}
+
+function vf() {
+	bat EDITOR $(fdfind --type f | fzf)
+}
+
 # Git
 
 source ~/.git-flow-completion.zsh
+alias g-="git checkout -"
+export PATH=$HOME/git_bin:$PATH
+
+function repo {
+	cd $(git rev-parse --show-toplevel)
+}
 
 # TheFuck
 
