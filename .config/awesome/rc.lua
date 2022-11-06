@@ -600,7 +600,13 @@ awful.rules.rules = {
     },
 
 		{ rule = { name = "Picture in picture" },
-		  properties = { floating = true }
+		  properties = { floating = true, 
+                     sticky = true }
+	  },
+
+		{ rule = { name = "Picture-in-Picture" },
+		  properties = { floating = true, 
+                     sticky = true }
 	  },
 
 		{ rule = { class = "thunderbird" },
