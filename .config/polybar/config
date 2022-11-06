@@ -1,0 +1,56 @@
+[bar/status]
+fixed-center = true
+font-0 = Roboto:size=10:weight=bold;5
+font-1 = Hack NF:size=20;11
+background = #232323
+foreground = #e5e5e5
+dpi-x = 192
+dpi-y = 192
+height = 60
+line-size = 5
+modules-left = rofi ewmh
+modules-center = date
+tray-position = right
+tray-maxsize = 40
+tray-offset-y = 0
+enable-ipc = true
+
+[module/date]
+type = internal/date
+interval = 0.5
+date = %a, %B %e  %H:%M
+
+[module/rofi]
+type = custom/text
+content = 
+content-foreground = #d70a53
+content-padding = 3
+click-left = rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun
+
+[module/ewmh]
+type = internal/xworkspaces
+enable-scroll = false
+icon-0 = 1;
+icon-1 = 2;ﭮ
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+icon-5 = 6;
+icon-default = Missing Icon
+format = <label-state>
+
+label-active = %icon%
+label-active-background = #051e2c
+label-active-overline = #1b98e0
+label-active-padding = 3
+
+label-urgent = %icon%
+label-urgent-padding = 3
+
+label-occupied = %icon%
+label-occupied-padding = 3
+
+label-empty = %icon%
+label-empty-padding = 3
+
+
