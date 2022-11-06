@@ -455,16 +455,16 @@ globalkeys = gears.table.join(
 
 clientkeys = gears.table.join(
     awful.key({ modkey, }, "f", function(c)
-            local clients = awful.screen.focused().selected_tag:clients()
+            local clients = c.first_tag:clients()
 	    if c.fullscreen then
 				c.fullscreen = false
-				set_polybar_visible(true, screen_name(awful.screen.focused()))
+				set_polybar_visible(true, screen_name(c.screen))
 		for _, client in pairs(clients) do
 		    client.hidden = false
 		end
             else
 	        c.fullscreen = true
-					set_polybar_visible(false, screen_name(awful.screen.focused()))
+					set_polybar_visible(false, screen_name(c.screen))
 		for _, client in pairs(clients) do
 		    if client ~= c then
 		        client.hidden = true

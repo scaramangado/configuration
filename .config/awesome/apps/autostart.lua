@@ -8,6 +8,7 @@ return {
 		"nm-applet",
 	},
 	shell = {
+		"flatpak run com.github.wwmm.easyeffects --gapplication-service",
 		"killall picom ; sleep 0.2 ; picom",
 		"killall pasystray ; sleep 0.5 ; pasystray &",
 		"sleep 0.5 ; blueman-applet",
