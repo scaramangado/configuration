@@ -21,6 +21,5 @@ nnoremap <C-y> dd
 inoremap <C-y> <ESC>dd==gi
 
 " Splits
-nnoremap <leader>sv <C-w>v
-nnoremap <leader>sq <C-w>c
+nnoremap <leader>w <C-w>
 

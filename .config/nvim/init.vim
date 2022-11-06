@@ -31,6 +31,17 @@ set mouse=a
 set clipboard=unnamedplus
 
 set nohlsearch
+set incsearch
+
+" Disable arrow keys
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+vnoremap <Left> <nop>
+vnoremap <Right> <nop>
+vnoremap <Up> <nop>
+vnoremap <Down> <nop>
 
 source $HOME/.config/nvim/keymaps.vim
 

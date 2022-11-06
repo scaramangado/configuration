@@ -1,0 +1,42 @@
+set ignorecase
+set smartcase
+set scrolloff=8
+set surround
+set clipboard+=unnamed
+set ideajoin
+set multiple-cursors
+set nohlsearch
+set incsearch
+set visualbell
+set noerrorbells
+set number
+set relativenumber
+set notimeout
+set ttimeout
+let mapleader = " "
+
+" Mode Switching
+nnoremap <C-Space> i
+inoremap <C-Space> <Esc>l
+vnoremap <C-Space> <Esc>
+
+" Split management
+nnoremap <Leader>w <C-w>
+
+" Refresh Config
+sethandler <F5> n:vim v-i:ide
+nnoremap <F5> :source ~/.ideavimrc<CR>:echo "Refreshed config"<CR>
+
+" Disable arrow keys
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+vnoremap <Left> <nop>
+vnoremap <Right> <nop>
+vnoremap <Up> <nop>
+vnoremap <Down> <nop>
+
+" Comments
+nnoremap <Leader>c :action CommentByLineComment<CR>
+vnoremap <Leader>c :action CommentByLineComment<CR>
