@@ -553,10 +553,6 @@ awful.rules.rules = {
                      focus = false }
 		},
 
-    { rule = { name = "gdata.migration.title;" },
-      properties = { hidden = true }
-    },
-
 		{ rule = { class = "Gnome-calculator" },
 			properties = { floating = true },
 			callback = function (c)
