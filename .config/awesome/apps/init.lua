@@ -9,10 +9,9 @@ local apps_config = {
 		mail = "thunderbird",
 		music = "flatpak run com.spotify.Client",
 		lock = "i3lock -i ~/.config/awesome/wallpapers/pyramids.png && qdbus org.keepassxc.KeePassXC.MainWindow /keepassxc org.keepassxc.MainWindow.lockAllDatabases",
-		--lock = "i3lock -i ~/.config/awesome/wallpapers/pyramids.png && keepassxc --lock",
 		password = "keepassxc",
 		calculator = "flatpak run org.gnome.Calculator",
-		screenshot = "sleep 0.1 && scrot -s /tmp/scrot -e 'xclip -selection c -t image/png < $f'" 
+		screenshot = "maim -s -u | xclip -selection clipboard -t image/png -i" 
 	},
 	autostart = require("apps.autostart")
 }
