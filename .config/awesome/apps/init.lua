@@ -11,7 +11,7 @@ local apps_config = {
 		music = "flatpak run com.spotify.Client",
 		lock = "i3lock -i ~/.config/awesome/wallpapers/pyramids.png && qdbus org.keepassxc.KeePassXC.MainWindow /keepassxc org.keepassxc.MainWindow.lockAllDatabases",
 		password = "keepassxc",
-		calculator = "flatpak run org.gnome.Calculator",
+		calculator = "flatpak run org.kde.kalk",
 		screenshot = "maim -s -u | xclip -selection clipboard -t image/png -i" 
 	},
 	autostart = require("apps.autostart")

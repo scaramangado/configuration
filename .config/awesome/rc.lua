@@ -619,7 +619,7 @@ awful.rules.rules = {
                      focus = false }
 		},
 
-		{ rule = { class = "gnome-calculator" },
+		{ rule = { class = "kalk" },
 			properties = { floating = true },
 			callback = function (c)
 				awful.placement.centered(c,nil)
