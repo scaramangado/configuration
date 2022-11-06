@@ -101,7 +101,7 @@ label-empty-padding = 3
 
 [module/cpu]
 type = custom/script
-exec = sensors 2>/dev/null | awk '/Tdie:.*/ { print substr($2,2) }'
+exec = sensors 2>/dev/null | awk '/Tctl:.*/ { print substr($2,2) }'
 interval = 5
 
 [module/src]
