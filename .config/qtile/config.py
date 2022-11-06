@@ -2,8 +2,11 @@ import os
 import subprocess
 
 from libqtile import layout, hook, bar, widget, qtile
+from libqtile.backend.x11.window import Window
 from libqtile.config import Key, Group, Screen, Match
 from libqtile.lazy import lazy
+from xcffib.xproto import EventMask
+from libqtile.log_utils import logger
 
 meta = "mod4"
 alt = "mod1"
@@ -13,6 +16,52 @@ shift = "shift"
 terminal = "/usr/bin/alacritty"
 browser = "/usr/bin/brave"
 launcher = "/usr/bin/rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun"
+
+layout_settings = {
+    "border_focus": "#ffffff",
+    "border_width": 2,
+    "margin": 10,
+    "new_client_position": "bottom",
+    "single_border_width": 1,
+    "single_margin": 10,
+    "change_ratio": 0.01,
+    "change_size": 10,
+}
+
+layouts = [
+    layout.MonadTall(**layout_settings),
+    layout.Max(),
+    layout.Floating(**layout_settings),
+]
+
+floating_layout = layout.Floating(**layout_settings)
+
+
+def toggle_fullscreen(q):
+    group = q.current_group
+    if type(group.layout) is layout.Max:
+        group.layout = "monadtall"
+    else:
+        group.layout = "max"
+    refresh_bar(q)
+
+
+def refresh_bar(q):
+    for screen in q.screens:
+        screen_name = "DisplayPort-" + str(screen.index)
+        pid = read_first_line("/tmp/polybar_" + screen_name + ".pid")
+        if type(screen.group.layout) is layout.Max:
+            q.cmd_spawn(("polybar-msg -p " + pid + " cmd hide").split())
+            type(screen.top) is bar.Bar and screen.top.show(False)
+        else:
+            q.cmd_spawn(("polybar-msg -p " + pid + " cmd show").split())
+            type(screen.top) is bar.Bar and screen.top.show(True)
+
+
+def read_first_line(filename):
+    with open(filename) as file:
+        return file.read()
+
 
 keys = [
     Key([meta, ], "space", lazy.spawn(launcher), desc="Open launcher"),
@@ -36,7 +85,7 @@ keys = [
     Key([meta, ctrl, ], "r", lazy.layout.reset(), desc="Reset all window sizes"),
 
     Key([meta, ], "q", lazy.window.kill(), desc="Close focused window"),
-    Key([meta, ], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
+    Key([meta, ], "f", lazy.function(toggle_fullscreen), desc="Toggle fullscreen"),
 
     Key([meta, ctrl], "F5", lazy.restart(), desc="Restart Qtile"),
     Key([meta, ], "Escape", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -60,25 +109,9 @@ for i in groups:
         Key([meta, "shift", ], i.name, lazy.window.togroup(i.name), desc="Move window to group {}".format(i.name)),
     ])
 
-layout_settings = {
-    "border_focus": "#ffffff",
-    "border_width": 2,
-    "margin": 10,
-    "new_client_position": "bottom",
-    "single_border_width": 1,
-    "single_margin": 10,
-    "change_ratio": 0.01,
-    "change_size": 10,
-}
-
-layouts = [
-    layout.MonadTall(**layout_settings),
-    layout.Floating(name="floating", **layout_settings),
-]
-
 
 def test():
-    qtile.cmd_spawn("notify-send test")
+    logger.warning("click")
 
 
 screens = [
@@ -91,7 +124,7 @@ screens = [
                 background="#232323",
                 fontsize=60,
                 padding=10,
-                # mouse_callbacks={"Button1": lambda q: q.cmd_spawn("kill -s USR1 $(pidof deadd-notification-center)")},
+                # mouse_callbacks={"Button1": lambda: qtile.cmd_spawn("kill -s USR1 $(pidof deadd-notification-center)")},
                 mouse_callbacks={'Button1': test},
             ),
         ],
@@ -99,7 +132,7 @@ screens = [
         margin=[0, 0, 0, 3780],
         background="#232323"
     )),
-    Screen(top=bar.Gap(size=60))
+    Screen(top=bar.Bar([], 60))
 ]
 
 follow_mouse_focus = False
@@ -119,8 +152,63 @@ def autostart():
 
 @hook.subscribe.client_new
 def window_rules(c):
+    # Floating calculator
     if c.window.get_wm_class() == ["gnome-calculator", "Gnome-calculator"]:
         c.floating = True
+    # Floating IntelliJ splash
     if (c.window.get_wm_class() == ["jetbrains-idea-ce", "jetbrains-idea-ce"] and
             c.window.get_name() == "win0"):
         c.floating = True
+    # Floating PyCharm splash
+    if (c.window.get_wm_class() == ["jetbrains-pycharm-ce", "jetbrains-pycharm-ce"] and
+            c.window.get_name() == "win0"):
+        c.floating = True
+
+
+@hook.subscribe.focus_change
+def refresh():
+    refresh_bar(qtile)
+
+
+def screen_change(event, q):
+    x = -1
+    y = -1
+    if type(event) is Window:
+        x = event.x
+        y = event.y
+    elif hasattr(event, "root_x") and hasattr(event, "root_y"):
+        x = event.root_x
+        y = event.root_y
+    if x == -1 or y == -1:
+        return
+    screen = q.find_screen(x, y)
+    if screen:
+        index_under_mouse = screen.index
+        if index_under_mouse != q.current_screen.index:
+            q.focus_screen(index_under_mouse, warp=False)
+            if type(event) is Window:
+                event.cmd_focus(warp=False)
+    q.process_button_motion(x, y)
+
+
+def mouse_move(q):
+    assert q is not None
+    # noinspection PyProtectedMember
+    q.core._root.set_attribute(eventmask=(EventMask.StructureNotify
+                                          | EventMask.SubstructureNotify
+                                          | EventMask.SubstructureRedirect
+                                          | EventMask.EnterWindow
+                                          | EventMask.LeaveWindow
+                                          | EventMask.ButtonPress
+                                          | EventMask.PointerMotion))
+    setattr(q.core, "handle_MotionNotify", lambda e: screen_change(e, q))
+
+
+@hook.subscribe.client_mouse_enter
+def hover(window):
+    screen_change(window, qtile)
+
+
+@hook.subscribe.startup
+def enable_auto_screen_focus():
+    mouse_move(qtile)
