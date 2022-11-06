@@ -11,6 +11,6 @@ EXT_COUNT=$(echo $EXT_JSON | jq .pagination.size 2>/dev/null)
 
 COUNT=$(( $MAIN_COUNT + $EXT_COUNT ))
 
-[[ COUNT -ne 14 ]] && echo "🏆 $COUNT" || echo ""
+[[ COUNT -ne 13 ]] && echo "🏆 $COUNT" || echo ""
 exit 0
 
