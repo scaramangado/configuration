@@ -527,7 +527,7 @@ awful.rules.rules = {
 										 focusable = false,
 									   x = 0, y = 0 }},	 
 
-    { rule = { name = "Discord" },
+    { rule = { class = "discord" },
       properties = { tag = awful.screen.focused().tags[2],
                      focus = false }},
 
