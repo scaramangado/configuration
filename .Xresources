@@ -44,7 +44,7 @@ URxvt.perl-ext-common: default,url-select,clipboard,keyboard-select,selection-to
 URxvt.iconFile: /usr/share/icons/Papirus-Dark/96x96/apps/terminal.svg
 URxvt.depth: 32
 Rxvt.background: [70]#000000
-*.font: xft:JetBrainsMono:style=Regular:size=11
+*.font: xft:JetBrainsMono:style=Regular:size=11,xft:HackNF:style=Regular:size=11,xft:TwitterColorEmoji:style=Regular:size=11
 *.boldFont: xft:JetBrainsMono:style=Bold:size=11
 *.italicFont: xft:JetBrainsMono:style=Italic:size=11
 *.boldItalicFont: xft:JetBrainsMono:style=Bold Italic:size=11

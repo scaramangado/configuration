@@ -41,10 +41,17 @@ zle -N edit-command-line
 bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
-# Fix ctrl + arrow
+# Fix keyboard
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# To generate the file: autoload zkbd && zkbd
+[[ -f ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE} ]] && source ~/.zkbd/$TERM-${${DISPLAY:t}:-$VENDOR-$OSTYPE}
+[[ -n ${key[Home]} ]] && bindkey "${key[Home]}" beginning-of-line
+[[ -n ${key[End]} ]] && bindkey "${key[End]}" end-of-line
+[[ -n ${key[Delete]} ]] && bindkey "${key[Delete]}" delete-char
+[[ -n ${key[Backspace]} ]] && bindkey "${key[Backspace]}" backward-delete-char
 
 # History
 
