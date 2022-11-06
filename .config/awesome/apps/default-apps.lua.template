@@ -1,0 +1,6 @@
+return {
+    browser = "google-chrome",
+    social = "discord",
+    terminal = "urxvtc"
+}
+
