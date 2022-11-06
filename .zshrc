@@ -108,6 +108,7 @@ alias scp="scp -T"
 type batcat >/dev/null 2>&1 && alias bat="batcat"
 alias dcup="sudo docker-compose up -d"
 alias dcdown="sudo docker-compose down"
+alias yt='yt-dlp -o "%(title)s"'
 
 function ef() {
 	$EDITOR $(fdfind --type f | fzf)
