@@ -33,3 +33,6 @@ inoremap <C-y> <ESC>dd==gi
 " Splits
 nnoremap <leader>w <C-w>
 
+" NERDTree
+nnoremap <A-1> :NERDTreeToggle<CR>
+
