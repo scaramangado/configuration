@@ -1,7 +1,7 @@
 export GDK_SCALE=2
 export GDK_DPI_SCALE=0.5
-export WINEARCH=win32
-export WINEPREFIX=~/.wine-32
+#export WINEARCH=win32
+#export WINEPREFIX=~/.wine-32
 export PULSE_COOKIE=~/.pulse-cookie
 export QT_STYLE_OVERRIDE=adwaita-dark
 
