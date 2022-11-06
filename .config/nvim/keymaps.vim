@@ -20,3 +20,7 @@ vnoremap <A-S-Up> :m '<-2<CR>gv=gv
 nnoremap <C-y> dd
 inoremap <C-y> <ESC>dd==gi
 
+" Splits
+nnoremap <leader>sv <C-w>v
+nnoremap <leader>sq <C-w>c
+

@@ -1,33 +1,36 @@
 set nocompatible
+set termguicolors
 
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 syntax on
 filetype plugin on
+set completeopt=menuone,noselect,noinsert
 
 set modelines=0
 
 set number
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+set relativenumber
 
 set ruler
 set visualbell
 set encoding=utf-8
 
 set wrap
-set textwidth=79
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set noshiftround
 
-set scrolloff=1
+set scrolloff=8
 set backspace=indent,eol,start
 set mouse=a
 
 set clipboard=unnamedplus
+
+set nohlsearch
 
 source $HOME/.config/nvim/keymaps.vim
 
@@ -36,13 +39,24 @@ source $HOME/.config/nvim/keymaps.vim
 call plug#begin()
 
 Plug 'vimwiki/vimwiki'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'udalov/kotlin-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'doums/darcula'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 
-" inoremap <silent><expr> <a-space> coc#refresh()
-" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"lua require("lsp_config")
+
+"let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+colorscheme darcula
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi CursorLineNr guibg=NONE ctermbg=NONE
+
+hi Overflow ctermfg=210 guifg=#ff6b68
+match Overflow /\%>119v.*/
 
 autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
