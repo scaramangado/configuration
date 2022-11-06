@@ -50,15 +50,6 @@ call plug#end()
 
 "let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
-hi Normal guibg=NONE ctermbg=NONE
-hi LineNr guibg=NONE ctermbg=NONE
-hi CursorLineNr guibg=NONE ctermbg=NONE
-
-hi Overflow ctermfg=210 guifg=#ff6b68
-match Overflow /\%>119v.*/
-
-autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
-
 :function! SourceIfExists(file)
 :  if filereadable(expand(a:file))
 :    exe 'source' a:file
@@ -68,4 +59,13 @@ autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 call SourceIfExists("$HOME/.config/nvim/keymaps.vim")
 call SourceIfExists("$HOME/.config/nvim/wsl.vim")
 call SourceIfExists("$HOME/.config/nvim/colorscheme.vim")
+
+hi Normal guibg=NONE ctermbg=NONE
+hi LineNr guibg=NONE ctermbg=NONE
+hi CursorLineNr guibg=NONE ctermbg=NONE
+
+hi Overflow ctermfg=210 guifg=#ff6b68
+match Overflow /\%>119v.*/
+
+autocmd VimEnter * :silent exec "!kill -s SIGWINCH $PPID"
 
