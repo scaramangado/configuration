@@ -558,7 +558,6 @@ root.keys(globalkeys)
 -- {{{ Rules
 
 local function discord_tag()
-    naughty.notify({text=""..screen.count()})
     return screen.count() > 1 and screen[2].tags[1] or screen.primary.tags[2]
 end
 
