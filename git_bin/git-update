@@ -1,0 +1,5 @@
+if [ "$#" -ne 1 ] ; then echo "Exactly one argument expected" && exit -1 ; fi
+BRANCH=$(git current-head)
+git checkout $1
+git pull
+git checkout $BRANCH

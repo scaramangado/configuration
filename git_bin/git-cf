@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+branch=$(git current-head)
+([[ $branch != "feature/"* ]] || [[ $branch != "hotfix/"* ]]) || (echo "Not on a feature/hotfix branch" && exit 1)
+feature=$(echo -n $branch | sed "s/[^\/]*\///")
+
+git commit -am "$feature $*"
+
