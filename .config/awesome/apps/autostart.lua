@@ -10,7 +10,7 @@ return {
 	shell = {
 		"killall picom ; sleep 0.2 ; picom",
 		"~/.config/polybar/launch.sh",
-		"killall pasystray ; sleep 0.5 ; pasystray &",
+		"killall pasystray ; sleep 0.5 ; pasystray -n &",
 		"sleep 0.5 ; blueman-applet",
 		"pgrep keepassxc || keepassxc",
 		-- "nitrogen --set-scaled ~/.config/awesome/wallpapers/pyramids.png || exit 0",
