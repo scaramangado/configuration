@@ -5,6 +5,7 @@ return {
 		"jetbrains-toolbox --minimize",
 		"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
 		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
+		"nm-applet",
 	},
 	shell = {
 		"killall picom ; sleep 0.2 ; picom",
