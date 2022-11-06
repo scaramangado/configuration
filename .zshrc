@@ -17,7 +17,7 @@ prompt_status() {
 }
 
 prompt_context() {
-  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname -s) "
+  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname) "
 }
 
 prompt_dir () {
@@ -67,7 +67,7 @@ bindkey '^r' history-incremental-search-backward
 
 setopt multios
 setopt prompt_subst
-source /etc/zsh_command_not_found
+[ -f /etc/zsh_command_not_found ] && source /etc/zsh_command_not_found
 alias ls="ls --color=auto"
 alias reset-bluetooth="[ \$(pgrep 'blu.*tray' | wc -l) -gt 1 ] && pgrep -o 'blu.*tray' | xargs kill ||:"
 
@@ -105,17 +105,19 @@ source ~/.git-flow-completion.zsh
 
 alias java8="/usr/lib/jvm/adoptopenjdk-8-hotspot-amd64/bin/java"
 alias java11="/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64/bin/java"
-alias java15="/usr/lib/jvm/adoptopenjdk-15-hotspot-amd64/bin/java"
+alias java16="/usr/lib/jvm/adoptopenjdk-16-hotspot-amd64/bin/java"
 alias java-version="sudo update-alternatives --config java"
 
 # TheFuck
 
-eval $(thefuck --alias)
+type thefuck >/dev/null 2>&1 && eval $(thefuck --alias)
 
 # Syntax Highlighting
 
 typeset -A ZSH_HIGHLIGHT_PATTERNS
 ZSH_HIGHLIGHT_PATTERNS+=('(?)-rf *' 'fg=white,bold,bg=red')
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
+[ -f /usr/share/zsh/plugins/gzsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || echo -n
 
