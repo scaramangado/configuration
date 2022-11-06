@@ -13,6 +13,6 @@ EXT_COUNT=$(echo $EXT_JSON | tr -d '\r\n' | jq .pagination.size 2>/dev/null || e
 
 COUNT=$(( $MAIN_COUNT + $EXT_COUNT ))
 
-[ ! "$COUNT" = "3" ] && echo "🏆 $COUNT" || echo ""
+[[ "$COUNT" > "2" ]] && echo "🏆 $COUNT" || echo ""
 exit 0
 
