@@ -1,2 +1,2 @@
-git branch -r --merged | grep --invert-match -P '.*/(dev|develop|master|main)' | sed 's/.*origin\///' | xargs git push origin --delete
+git branch -r --merged | grep --invert-match -P '.*/(dev|develop|master|main|integration)' | sed 's/.*origin\///' | xargs git push origin --delete
 
