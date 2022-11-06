@@ -11,7 +11,7 @@ configuration {
 	selbg:                       #a9b7c6;
 	actbg:                       #a9b7c6;
 	urgbg:                       #e53935;
-	winbg:			             #2b2b2b;
+	winbg:			                 #2b2b2b;
 
 	selected-normal-foreground:  @winbg;
 	normal-foreground:           @text-color;
@@ -44,6 +44,8 @@ window {
 	orientation: horizontal;
 	children:	 [mainbox];
 	margin-top: 60px;
+	border: 0;
+	padding: 0;
 }
 
 mainbox {
@@ -67,6 +69,7 @@ listview {
 	spacing: 0.5em;
 	dynamic: false;
 	cycle:   true;
+	scrollbar: false;
 }
 
 element {
@@ -99,8 +102,6 @@ element normal.active {
 element selected.normal {
 	background-color: @selected-normal-background;
 	text-color:       @selected-normal-foreground;
-	border:           0 5px solid 0 0;
-	border-color:	    @active-background;
 }
 
 element selected.urgent {
