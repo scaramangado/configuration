@@ -293,7 +293,7 @@ globalkeys = gears.table.join(
 				{ description = "show help", group = "awesome" }),
     awful.key({ modkey }, "Escape", function() _G.exit_screen_show() end,
         { description = "Open the Quit Menu", group = "awesome" }),
-		awful.key({ modkey }, "l", function() awful.spawn(apps.default.lock) end,
+		awful.key({ modkey }, "l", function() awful.spawn.with_shell(apps.default.lock) end,
 				{ description = "Lock the Screen", group = "awesome" }),
     awful.key({ modkey, }, "Left", awful.tag.viewprev,
         { description = "view previous", group = "tag" }),
