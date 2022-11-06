@@ -21,7 +21,7 @@ require("awful.autofocus")
 local icons = require("icons")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-
+require("menus.exit-screen")
 local apps = require("apps")
 
 -- Naughty presets
@@ -219,50 +219,8 @@ client.connect_signal("property::urgent", function(c)
 end)
 --- }}}
 
--- {{{ Helper function for quitmenu
-
-function hibernate()
-	awful.spawn.with_shell(apps.default.lock .. " & systemctl hibernate")
-end
-
-function suspend()
-	awful.spawn.with_shell(apps.default.lock .. " & systemctl suspend")
-end
-
-myquitmenu = {
-	{ "Shutdown", "systemctl poweroff", menubar.utils.lookup_icon("xfsm-shutdown") },
-	{ "Reboot", "systemctl reboot", menubar.utils.lookup_icon("xfsm-reboot") },
-	{ "Hibernate", hibernate, menubar.utils.lookup_icon("xfsm-hibernate") },
-	{ "Suspend", suspend, menubar.utils.lookup_icon("xfsm-suspend") },
-	{ "Log Out", function() awesome.quit() end, menubar.utils.lookup_icon("xfsm-logout") },
-}
-
-m_theme = {
-    border_width = 0,
-    border_color = "#a9b7c6",
-    bg_focus = "#a9b7c6",
-    bg_normal = "#2b2b2b",
-    fg_focus = "#2b2b2b",
-    fg_normal = "#a9b7c6",
-    height = 100,
-    width = 350,
-    font = "Roboto 16"
-}
-
-quitpopup = awful.menu({ items = myquitmenu, theme = m_theme })
-local function quitmenu()
-    local s = awful.screen.focused()
-    local m_coords = {
-        x = (s.geometry.x + s.workarea.width) / 2 - 150,
-        y = (s.geometry.y + s.workarea.height) / 2  - 350
-    }
-    quitpopup:show({ coords = m_coords })
-end
-
--- }}}
-
 local function sort_clients(clients)
-    for k, c in pairs(clients) do
+    for _, c in pairs(clients) do
         c.geo = c:geometry()
     end
 
@@ -330,9 +288,10 @@ local function unminimize_menu()
 end
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_help,
-    { description = "show help", group = "awesome" }),
-    awful.key({ modkey }, "Escape", quitmenu,
+globalkeys = gears.table.join(
+		awful.key({ modkey, }, "F1", hotkeys_popup.show_help,
+				{ description = "show help", group = "awesome" }),
+    awful.key({ modkey }, "Escape", function() _G.exit_screen_show() end,
         { description = "Open the Quit Menu", group = "awesome" }),
 		awful.key({ modkey }, "l", function() awful.spawn(apps.default.lock) end,
 				{ description = "Lock the Screen", group = "awesome" }),
@@ -372,7 +331,7 @@ globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_he
             local clients = t:clients()
             if size(clients) > 1 then
                 sort_clients(clients)
-                awful.client.setwfact(0.75, clients[2])
+                awful.client.setwfact(0.75, clients[3])
             end
         end,
         { description = "set layout for development", group = "layout" }),
@@ -383,7 +342,7 @@ globalkeys = gears.table.join(awful.key({ modkey, }, "F1", hotkeys_popup.show_he
             local clients = t:clients()
             if size(clients) > 1 then
                 sort_clients(clients)
-                awful.client.setwfact(0.5, clients[2])
+                awful.client.setwfact(0.5, clients[3])
             end
         end,
         { description = "reset layout", group = "layout" }),
