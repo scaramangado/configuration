@@ -17,7 +17,7 @@ prompt_status() {
 }
 
 prompt_context() {
-  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname -s) "
+  prompt_segment black default " %(!.%{%F{yellow}%}.)$(hostname) "
 }
 
 prompt_dir () {
