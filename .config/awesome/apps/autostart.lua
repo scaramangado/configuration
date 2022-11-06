@@ -4,7 +4,8 @@ return {
 		"numlockx on",
 		"jetbrains-toolbox --minimize",
 		"blueman-tray",
-		"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1"
+		"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
+		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
 	},
 	shell = {
 		"killall picom ; sleep 0.1 ; picom",
