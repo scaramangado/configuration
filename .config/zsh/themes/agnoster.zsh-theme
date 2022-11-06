@@ -96,6 +96,9 @@ prompt_git() {
     test -n "$(git status --porcelain --ignore-submodules)"
   }
   ref="$vcs_info_msg_0_"
+  #if [[ "$ref" == "sprint-"* ]] ; then
+    #ref=$(echo -n "$ref" | awk -F "-" '{printf("%s-%s-%s-...", $1, $2, $3)}')
+  #fi
   if [[ -n "$ref" ]]; then
     if is_dirty; then
       color=yellow
@@ -105,7 +108,11 @@ prompt_git() {
       ref="${ref} "
     fi
     if [[ "${ref/.../}" == "$ref" ]]; then
-      ref="$BRANCH $ref"
+      if [[ $ref == *"sprint-"* ]] ; then
+        ref="$BRANCH $(echo -n $ref | grep -oP '(?<=sprint-\d\d-)\d{6,7}') "
+      else
+        ref="$BRANCH $ref"
+      fi
     else
       ref="$DETACHED ${ref/.../}"
     fi
