@@ -165,7 +165,7 @@ screens = [
 follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = False
-auto_fullscreen = False
+auto_fullscreen = True
 focus_on_window_activation = "urgent"
 reconfigure_screens = True
 auto_minimize = False
@@ -173,7 +173,7 @@ auto_minimize = False
 
 @hook.subscribe.startup
 def autostart():
-    autostart_script = os.path.expanduser("~/.config/qtile/autostart.sh")
+    autostart_script = os.path.expanduser("/autostart.sh")
     subprocess.call([autostart_script])
 
 
@@ -238,11 +238,11 @@ def mouse_move(q):
     setattr(q.core, "handle_MotionNotify", lambda e: screen_change(e, q))
 
 
-@hook.subscribe.client_mouse_enter
-def hover(window):
-    screen_change(window, qtile)
-
-
-@hook.subscribe.startup
-def enable_auto_screen_focus():
-    mouse_move(qtile)
+# @hook.subscribe.client_mouse_enter
+# def hover(window):
+#     screen_change(window, qtile)
+#
+#
+# @hook.subscribe.startup
+# def enable_auto_screen_focus():
+#     mouse_move(qtile)
