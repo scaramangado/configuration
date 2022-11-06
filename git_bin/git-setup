@@ -1,0 +1,23 @@
+#!/bin/sh
+
+script_dir="$HOME/git_bin/setup_scripts"
+
+all_scripts=($(find $script_dir -maxdepth 1 -perm -111 -type f -printf "%f\n"))
+
+list_scripts() {
+	echo "Available Setup Scripts:"
+	printf '%s\n' "${all_scripts[@]}"
+	exit 0
+}
+
+run_script() {
+	[ ! -f "$script_dir/$1" ] && echo "Script '$1' not found" && exit 1
+	"$script_dir/$1"
+}
+
+case $# in
+	0) list_scripts ;;
+	1) run_script $1 ;;
+	*) exit -1 ;;
+esac
+
