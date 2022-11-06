@@ -11,7 +11,7 @@ local apps_config = {
 		lock = "i3lock -i .config/awesome/wallpapers/outset_day.png",
 		password = "keepassxc",
 		calculator = "flatpak run org.gnome.Calculator",
-		screenshot = "sleep 0.5 && scrot -s /tmp/scrot -e 'xclip -selection c -t image/png < $f'" 
+		screenshot = "sleep 0.1 && scrot -s /tmp/scrot -e 'xclip -selection c -t image/png < $f'" 
 	},
 	autostart = require("apps.autostart")
 }
