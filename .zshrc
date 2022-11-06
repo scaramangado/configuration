@@ -89,7 +89,7 @@ alias ll="ls -lAh"
 alias l="ls -lh"
 alias sudo="sudo "
 alias scp="scp -T"
-alias bat="batcat"
+type batcat >/dev/null 2>&1 && alias bat="batcat"
 alias dcup="sudo docker-compose up -d"
 alias dcdown="sudo docker-compose down"
 
