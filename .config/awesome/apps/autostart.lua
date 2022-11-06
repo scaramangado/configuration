@@ -16,7 +16,8 @@ return {
 		"nitrogen --random --set-scaled ~/.config/awesome/wallpapers || exit 0",
 		"~/.config/polybar/launch.sh",
 		"pgrep thunderbird || thunderbird",
-		"/usr/libexec/deja-dup/deja-dup-monitor"
+		"/usr/libexec/deja-dup/deja-dup-monitor",
+		"/usr/lib/deja-dup/deja-dup-monitor",
 	}
 }
 
