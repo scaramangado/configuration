@@ -4,7 +4,7 @@ alias config='git --git-dir=$HOME/.config-repo/ --work-tree=$HOME'
 ### BASE SETUP
 
 bindkey -e
-PATH=/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
+PATH=~/.scripts:/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
 
 # Theme
 
