@@ -41,6 +41,8 @@ Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 Plug 'doums/darcula'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
@@ -63,6 +65,7 @@ call SourceIfExists("$HOME/.config/nvim/keymaps.vim")
 call SourceIfExists("$HOME/.config/nvim/wsl.vim")
 call SourceIfExists("$HOME/.config/nvim/colorscheme.vim")
 call SourceIfExists("$HOME/.config/nvim/nerdtree.vim")
+call SourceIfExists("$HOME/.config/nvim/statusline.vim")
 
 hi Normal guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
