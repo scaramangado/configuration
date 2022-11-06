@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-local distro=""
-local color=""
+distro=""
+color=""
 
 case $(lsb_release -si || echo "") in
 	Debian) distro= ; color=#d70a53 ;;
