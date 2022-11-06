@@ -365,8 +365,10 @@ globalkeys = gears.table.join(
             local clients = t:clients()
             if size(clients) > 1 then
                 sort_clients(clients)
-								-- Polybar first client on tag 1
-								local c = (t.index == 1 and clients[3] or clients[2])
+								-- If Polybar first client on tag 1
+								-- local c = (t.index == 1 and clients[3] or clients[2])
+                -- else
+                local c = clients[2]
                 awful.client.setwfact(0.75, c)
             end
         end,

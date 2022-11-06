@@ -1,8 +1,8 @@
 import os
 import subprocess
 
-from libqtile import layout, hook, bar
-from libqtile.config import Key, Group, Screen, Match, Rule
+from libqtile import layout, hook, bar, widget, qtile
+from libqtile.config import Key, Group, Screen, Match
 from libqtile.lazy import lazy
 
 meta = "mod4"
@@ -33,7 +33,7 @@ keys = [
     Key([meta, ctrl, ], "h", lazy.layout.shrink_main(), desc="Shrink main window"),
     Key([meta, ctrl, ], "plus", lazy.layout.grow(), desc="Grow window"),
     Key([meta, ctrl, ], "minus", lazy.layout.shrink(), desc="Shrink window"),
-    Key([meta, ], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([meta, ctrl, ], "r", lazy.layout.reset(), desc="Reset all window sizes"),
 
     Key([meta, ], "q", lazy.window.kill(), desc="Close focused window"),
     Key([meta, ], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
@@ -67,6 +67,8 @@ layout_settings = {
     "new_client_position": "bottom",
     "single_border_width": 1,
     "single_margin": 10,
+    "change_ratio": 0.01,
+    "change_size": 10,
 }
 
 layouts = [
@@ -74,8 +76,29 @@ layouts = [
     layout.Floating(name="floating", **layout_settings),
 ]
 
+
+def test():
+    qtile.cmd_spawn("notify-send test")
+
+
 screens = [
-    Screen(top=bar.Gap(size=60)),
+    Screen(top=bar.Bar(
+        [
+            widget.TextBox(
+                text="",
+                font="Hack NF",
+                foreground="#e5e5e5",
+                background="#232323",
+                fontsize=60,
+                padding=10,
+                # mouse_callbacks={"Button1": lambda q: q.cmd_spawn("kill -s USR1 $(pidof deadd-notification-center)")},
+                mouse_callbacks={'Button1': test},
+            ),
+        ],
+        60,
+        margin=[0, 0, 0, 3780],
+        background="#232323"
+    )),
     Screen(top=bar.Gap(size=60))
 ]
 
@@ -83,7 +106,7 @@ follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = False
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "urgent"
 reconfigure_screens = True
 auto_minimize = False
 
@@ -95,7 +118,7 @@ def autostart():
 
 
 @hook.subscribe.client_new
-def func(c):
+def window_rules(c):
     if c.window.get_wm_class() == ["gnome-calculator", "Gnome-calculator"]:
         c.floating = True
     if (c.window.get_wm_class() == ["jetbrains-idea-ce", "jetbrains-idea-ce"] and
