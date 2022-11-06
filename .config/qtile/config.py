@@ -1,3 +1,4 @@
+import asyncio
 import os
 import subprocess
 
@@ -16,6 +17,7 @@ shift = "shift"
 terminal = "/usr/bin/alacritty"
 browser = "/usr/bin/brave"
 launcher = "/usr/bin/rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun"
+password_manager = "keepassxc"
 
 layout_settings = {
     "border_focus": "#ffffff",
@@ -35,6 +37,21 @@ layouts = [
 ]
 
 floating_layout = layout.Floating(**layout_settings)
+
+
+def toggle_dev(q):
+    group = q.current_group
+    if type(group.layout) is not layout.MonadTall or len(group.layout.clients) != 3:
+        return
+    group.layout.ratio = 0.565
+    group.layout.relative_sizes = [0.75, 0.25]
+    group.layout_all()
+
+    # noinspection PyUnresolvedReferences
+    # if group.layout.info()["name"] == "dev":
+    #     group.layout = "monadtall"
+    # else:
+    #     group.layout = "dev"
 
 
 def toggle_fullscreen(q):
@@ -67,6 +84,8 @@ keys = [
     Key([meta, ], "space", lazy.spawn(launcher), desc="Open launcher"),
     Key([meta, ], "Return", lazy.spawn(terminal), desc="Launch Terminal"),
     Key([meta, ], "b", lazy.spawn(browser), desc="Launch Browser"),
+    Key([meta, shift, ], "b", lazy.spawn(browser + " --incognito"), desc="Launch Private Browser"),
+    Key(["mod5", ], "k", lazy.spawn(password_manager), desc="Launch Password Manager"),
 
     Key([meta, ], "Left", lazy.screen.prev_group(), desc="Go to then group on the left"),
     Key([meta, ], "Right", lazy.screen.next_group(), desc="Go to then group on the right"),
@@ -82,10 +101,18 @@ keys = [
     Key([meta, ctrl, ], "h", lazy.layout.shrink_main(), desc="Shrink main window"),
     Key([meta, ctrl, ], "plus", lazy.layout.grow(), desc="Grow window"),
     Key([meta, ctrl, ], "minus", lazy.layout.shrink(), desc="Shrink window"),
+    Key([meta, ctrl, ], "d", lazy.function(toggle_dev), desc="Toggle dev layout"),
     Key([meta, ctrl, ], "r", lazy.layout.reset(), desc="Reset all window sizes"),
 
     Key([meta, ], "q", lazy.window.kill(), desc="Close focused window"),
     Key([meta, ], "f", lazy.function(toggle_fullscreen), desc="Toggle fullscreen"),
+    Key([meta, ctrl, ], "space", lazy.window.toggle_floating(), desc="Toggle floating"),
+    Key([meta, ], "F11", lazy.window.toggle_maximize(), desc="Toggle maximize"),
+
+    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause"), desc="Play/Pause"),
+    Key([], "XF86AudioNext", lazy.spawn("playerctl next"), desc="Next"),
+    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous"), desc="Previous"),
+    Key([], "XF86AudioMute", lazy.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle"), desc="Toggle Mute"),
 
     Key([meta, ctrl], "F5", lazy.restart(), desc="Restart Qtile"),
     Key([meta, ], "Escape", lazy.shutdown(), desc="Shutdown Qtile"),
@@ -97,7 +124,7 @@ groups = [
     Group("3"),
     Group("4", layout="floating"),
     Group("5", matches=[Match(wm_class="Thunderbird")]),
-    Group("6", matches=[Match(wm_class="Spotify")]),
+    Group("6"),
     Group("7"),
     Group("8"),
     Group("9"),
@@ -138,7 +165,7 @@ screens = [
 follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = False
-auto_fullscreen = True
+auto_fullscreen = False
 focus_on_window_activation = "urgent"
 reconfigure_screens = True
 auto_minimize = False
@@ -163,6 +190,13 @@ def window_rules(c):
     if (c.window.get_wm_class() == ["jetbrains-pycharm-ce", "jetbrains-pycharm-ce"] and
             c.window.get_name() == "win0"):
         c.floating = True
+
+
+@hook.subscribe.client_new
+async def spotify(c):
+    await asyncio.sleep(0.1)
+    if c.window.get_wm_class() == ["spotify", "Spotify"]:
+        c.togroup("6")
 
 
 @hook.subscribe.focus_change
