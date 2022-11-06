@@ -354,6 +354,8 @@ globalkeys = gears.table.join(
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, }, "b", function() awful.spawn(apps.default.browser) end,
         { description = "open browser", group = "launcher" }),
+    awful.key({ modkey, "Shift" }, "b", function() awful.spawn(apps.default.browser .. " --incognito") end,
+        { description = "open browser (private)", group = "launcher" }),
     awful.key({ modkey, }, "d", function() awful.spawn(apps.default.social) end,
         { description = "open chat", group = "launcher" }),
     awful.key({ "Mod5", }, "k", function() awful.spawn(apps.default.password) end,
