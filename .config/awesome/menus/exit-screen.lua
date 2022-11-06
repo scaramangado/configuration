@@ -38,6 +38,10 @@ local buildButton = function(icon)
   return abutton
 end
 
+function kill_apps()
+  awful.spawn.with_shell("killall Discord &")
+end
+
 function suspend_command()
   exit_screen_hide()
   awful.spawn.with_shell(apps.default.lock .. ' & systemctl suspend')
@@ -50,10 +54,12 @@ function hibernate_command()
   awful.spawn.with_shell(apps.default.lock .. ' & systemctl hibernate')
 end
 function poweroff_command()
+  kill_apps()
   awful.spawn.with_shell('systemctl poweroff')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 function reboot_command()
+  kill_apps()
   awful.spawn.with_shell('systemctl reboot')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
