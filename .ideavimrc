@@ -1,6 +1,6 @@
 set ignorecase
 set smartcase
-set scrolloff=8
+set scrolloff=10
 set surround
 set clipboard+=unnamed
 set ideajoin
@@ -22,6 +22,7 @@ vnoremap <C-Space> <Esc>
 
 " Split management
 nnoremap <Leader>w <C-w>
+nnoremap <C-w>t <C-w>c<C-w>v:action GotoTest<CR>
 
 " Refresh Config
 sethandler <F5> n:vim v-i:ide
@@ -40,3 +41,6 @@ vnoremap <Down> <nop>
 " Comments
 nnoremap <Leader>c :action CommentByLineComment<CR>
 vnoremap <Leader>c :action CommentByLineComment<CR>
+
+" Autoformat
+nnoremap gQ mzgggqG`z
