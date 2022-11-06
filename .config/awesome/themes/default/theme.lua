@@ -79,7 +79,8 @@ theme.menu_width  = dpi(200)
 
 -- Define the image to load
 
-theme.wallpaper = function(s) awful.spawn.with_shell("nitrogen --random --set-scaled ~/.config/awesome/wallpapers") end
+theme.wallpaper = function(s) awful.spawn.with_shell("nitrogen --restore") end
+--theme.wallpaper = function(s) awful.spawn.with_shell("nitrogen --random --set-scaled ~/.config/awesome/wallpapers") end
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."default/layouts/fairhw.png"

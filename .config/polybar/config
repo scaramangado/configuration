@@ -1,4 +1,6 @@
-[bar/status]
+[bar/primary]
+monitor = DisplayPort-0
+override-redirect = true
 fixed-center = true
 font-0 = Roboto:size=10:weight=bold;5
 font-1 = Hack NF:size=20;11
@@ -9,12 +11,30 @@ dpi-x = 192
 dpi-y = 192
 height = 60
 line-size = 5
-modules-left = rofi ewmh
+modules-left = rofi ewmh_primary
 modules-center = date
 modules-right = src rtgg cpu
 tray-position = right
 tray-maxsize = 40
 tray-offset-y = 0
+enable-ipc = true
+
+[bar/secondary]
+monitor = DisplayPort-1
+override-redirect = true
+fixed-center = true
+font-0 = Roboto:size=10:weight=bold;5
+font-1 = Hack NF:size=20;11
+font-2 = Twitter Color Emoji:scale=12;5
+background = #232323
+foreground = #e5e5e5
+dpi-x = 192
+dpi-y = 192
+height = 60
+line-size = 5
+modules-left = rofi ewmh_secondary
+modules-center = date
+modules-right = src rtgg cpu
 enable-ipc = true
 
 [module/date]
@@ -29,16 +49,40 @@ content-foreground = ${env:POLY_DISTRO_COLOR:#ffffff}
 content-padding = 3
 click-left = rofi -config ~/.config/rofi-themes/launcher.rasi -modi drun -show drun
 
-[module/ewmh]
+[module/ewmh_primary]
 type = internal/xworkspaces
 enable-scroll = false
-icon-0 = 1;
-icon-1 = 2;ﭮ
-icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-icon-5 = 6;
-icon-default = Missing Icon
+icon-0 = 1_1;
+icon-1 = 1_2;ﭮ
+icon-2 = 1_3;
+icon-3 = 1_4;
+icon-4 = 1_5;
+icon-5 = 1_6;
+icon-default = 
+format = <label-state>
+
+label-active = %icon%
+label-active-background = #051e2c
+label-active-overline = #1b98e0
+label-active-padding = 3
+
+label-urgent = %icon%
+label-urgent-padding = 3
+
+label-occupied = %icon%
+label-occupied-padding = 3
+
+label-empty = %icon%
+label-empty-padding = 3
+
+[module/ewmh_secondary]
+type = internal/xworkspaces
+enable-scroll = false
+icon-0 = 2_1;磊
+icon-1 = 2_2;
+icon-2 = 2_3;
+icon-3 = 2_4;
+icon-default = 
 format = <label-state>
 
 label-active = %icon%

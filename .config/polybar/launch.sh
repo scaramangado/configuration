@@ -11,8 +11,23 @@ esac
 
 
 killall polybar
+rm /tmp/polybar_*.pid
+
+MONITOR=DisplayPort-0 \
 POLY_DISTRO=$distro \
 POLY_DISTRO_COLOR=$color \
 GDK_SCALE=1 \
 GDK_DPI_SCALE=1 \
-polybar status
+polybar primary &
+
+echo "$!" > /tmp/polybar_DisplayPort-0.pid
+
+MONITOR=DisplayPort-0 \
+POLY_DISTRO=$distro \
+POLY_DISTRO_COLOR=$color \
+GDK_SCALE=1 \
+GDK_DPI_SCALE=1 \
+polybar secondary &
+
+echo "$!" > /tmp/polybar_DisplayPort-1.pid
+
