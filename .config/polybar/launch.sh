@@ -1,4 +1,4 @@
 #!/bin/bash
 
 killall polybar
-polybar status
+polybar $(lsb_release -si)
