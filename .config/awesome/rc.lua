@@ -400,7 +400,9 @@ globalkeys = gears.table.join(
 		awful.key({ }, "XF86AudioNext", function() awful.spawn("playerctl next") end,
 				{ description = "Next", group = "media" }),
 		awful.key({ }, "XF86AudioPrev", function() awful.spawn("playerctl previous") end,
-				{ description = "Previous", group = "media" })
+				{ description = "Previous", group = "media" }),
+    awful.key({ }, "XF86AudioMute", function() awful.spawn("pactl -- set-sink-mute @DEFAULT_SINK@ toggle") end,
+        { description = "Toggle Mute", group = "media" })
 				)
 
 clientkeys = gears.table.join(
