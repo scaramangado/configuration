@@ -1,0 +1,6 @@
+#compdef config
+local -a cmds
+cmds=("status:git status" "commit:git commit" "push:git push" "add:git add")
+_describe 'command' cmds
+_alternative "add:List of files:_files"
+

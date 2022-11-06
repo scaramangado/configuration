@@ -1,10 +1,13 @@
 # Config repo
-alias config='git --git-dir=$HOME/.config-repo/ --work-tree=$HOME'
+config () {
+	git --git-dir=$HOME/.config-repo/ --work-tree=$HOME $@
+}
 
 ### BASE SETUP
 
 bindkey -e
 PATH=~/.scripts:/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
+fpath=(~/.config/zsh/completion $fpath)
 
 # Theme
 
@@ -29,7 +32,7 @@ AGNOSTER_PROMPT_SEGMENTS=("prompt_context" "prompt_dir" "prompt_virtualenv" "pro
 # Tab completion and auto cd
 
 setopt auto_cd
-autoload -U compinit && compinit
+autoload -U compinit && compinit -u
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' menu select
