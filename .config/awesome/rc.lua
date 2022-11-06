@@ -25,13 +25,13 @@ require("menus.exit-screen")
 local apps = require("apps")
 
 -- Naughty presets
-naughty.config.padding = 8
+naughty.config.padding = 60
 naughty.config.spacing = 8
 
 naughty.config.defaults.timeout = 5
 naughty.config.defaults.screen = 1
 naughty.config.defaults.position = 'top_right'
-naughty.config.defaults.margin = dpi(16)
+naughty.config.defaults.margin = dpi(6)
 naughty.config.defaults.ontop = true
 naughty.config.defaults.font = 'Roboto Regular 10'
 naughty.config.defaults.icon = nil
@@ -172,6 +172,12 @@ function screen_name(screen)
     end
 end
 
+local function apply_all_rules()
+    for _, c in ipairs(client.get()) do
+        awful.rules.apply(c)
+    end
+end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -187,7 +193,7 @@ awful.screen.connect_for_each_screen(function(s)
             name = '1_1'
         },
         {
-            type = 'social',
+            type = 'chat',
             name = '1_2'
         },
         {
@@ -211,11 +217,11 @@ awful.screen.connect_for_each_screen(function(s)
 
     local secondary_tags = {
         {
-            type = 'media',
+            type = 'social',
             name = '2_1'
         },
         {
-            type = 'chat',
+            type = 'media',
             name = '2_2'
         },
         {
@@ -243,7 +249,11 @@ awful.screen.connect_for_each_screen(function(s)
                 selected = i == 1
             })
     end
+
+    apply_all_rules()
 end)
+
+screen.connect_signal("removed", function(s) apply_all_rules() end)
 -- }}}
 
 -- {{{ Focus urgent clients automatically
@@ -546,6 +556,12 @@ root.keys(globalkeys)
 -- }}}
 
 -- {{{ Rules
+
+local function discord_tag()
+    naughty.notify({text=""..screen.count()})
+    return screen.count() > 1 and screen[2].tags[1] or screen.primary.tags[2]
+end
+
 awful.rules.rules = {
     -- All clients will match this rule.
     {
@@ -568,7 +584,7 @@ awful.rules.rules = {
 									   x = 0, y = 0 }},	 
 
     { rule = { class = "discord" },
-      properties = { tag = screen.primary.tags[2],
+      properties = { tag = discord_tag,
                      focus = false }},
 
     { rule = { class = "Spotify" },
