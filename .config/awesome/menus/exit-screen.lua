@@ -50,7 +50,7 @@ function hibernate_command()
   awful.spawn.with_shell(apps.default.lock .. ' & systemctl hibernate')
 end
 function poweroff_command()
-  awful.spawn.with_shell('systemctl shutdown')
+  awful.spawn.with_shell('systemctl poweroff')
   awful.keygrabber.stop(_G.exit_screen_grabber)
 end
 function reboot_command()
