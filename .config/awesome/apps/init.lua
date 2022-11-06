@@ -2,7 +2,8 @@ local _, user_apps = pcall(require, "apps.default-apps")
 
 local apps_config = {
 	default = {
-		browser = "brave-browser --force-device-scale-factor=2",
+		browser = "firefox",
+		--browser = "brave-browser --force-device-scale-factor=2",
 		social = "discord",
 		terminal = "alacritty",
 		files = "nemo",

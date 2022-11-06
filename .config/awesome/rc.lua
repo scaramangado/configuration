@@ -400,7 +400,8 @@ globalkeys = gears.table.join(
         { description = "open a terminal", group = "launcher" }),
     awful.key({ modkey, }, "b", function() awful.spawn(apps.default.browser) end,
         { description = "open browser", group = "launcher" }),
-    awful.key({ modkey, "Shift" }, "b", function() awful.spawn(apps.default.browser .. " --incognito") end,
+    --awful.key({ modkey, "Shift" }, "b", function() awful.spawn(apps.default.browser .. " --incognito") end,
+    awful.key({ modkey, "Shift" }, "b", function() awful.spawn(apps.default.browser .. " --private-window") end,
         { description = "open browser (private)", group = "launcher" }),
     awful.key({ modkey, }, "d", function() awful.spawn(apps.default.social) end,
         { description = "open chat", group = "launcher" }),
@@ -594,6 +595,10 @@ awful.rules.rules = {
       properties = { floating = true }
     },
 
+    { rule = { class = "jetbrains-idea-ce", name = "splash" },
+      properties = { floating = true }
+    },
+
 		{ rule = { name = "Picture in picture" },
 		  properties = { floating = true }
 	  },
@@ -608,7 +613,7 @@ awful.rules.rules = {
                      focus = false }
 		},
 
-		{ rule = { class = "Gnome-calculator" },
+		{ rule = { class = "gnome-calculator" },
 			properties = { floating = true },
 			callback = function (c)
 				awful.placement.centered(c,nil)
