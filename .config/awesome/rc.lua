@@ -356,8 +356,10 @@ globalkeys = gears.table.join(
         { description = "open browser", group = "launcher" }),
     awful.key({ modkey, }, "d", function() awful.spawn(apps.default.social) end,
         { description = "open chat", group = "launcher" }),
+    awful.key({ "Mod5", }, "k", function() awful.spawn(apps.default.password) end,
+        { description = "open password manager", group = "launcher" }),
 		awful.key({ }, "XF86Tools", function() awful.spawn(apps.default.music) end,
-        { description = "open m", group = "launcher" }),
+        { description = "open music player", group = "launcher" }),
     awful.key({ modkey, }, "e", function() awful.spawn(apps.default.files) end,
         { description = "open file manager", group = "launcher" }),
     awful.key({  }, "XF86Mail", function() awful.spawn(apps.default.mail) end,
@@ -365,7 +367,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "F5", awesome.restart,
         { description = "reload awesome", group = "awesome" }),
     awful.key({ modkey, "Control" }, "w", function() beautiful.wallpaper(nil) end,
-	{ description = "random wallpaper", gourp = "awesome" }),
+	{ description = "random wallpaper", group = "awesome" }),
     awful.key({ modkey, "Control" }, "q", awesome.quit,
         { description = "quit awesome", group = "awesome" }),
 
@@ -394,7 +396,11 @@ globalkeys = gears.table.join(
 		awful.key({ }, "XF86AudioNext", function() awful.spawn("playerctl next") end,
 				{ description = "Next", group = "media" }),
 		awful.key({ }, "XF86AudioPrev", function() awful.spawn("playerctl previous") end,
-				{ description = "Previous", group = "media" })
+				{ description = "Previous", group = "media" }),
+		
+		-- Simulated commands
+		awful.key({ "Mod5" }, ",", function() awful.spawn.with_shell("sleep 0.1; xdotool keyup Super_L keydown Alt key comma keyup Alt") end,
+			{ description="test", group = "test" })
 				)
 
 clientkeys = gears.table.join(
