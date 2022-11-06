@@ -4,7 +4,7 @@ local apps_config = {
 	default = {
 		browser = "firefox",
 		--browser = "brave-browser --force-device-scale-factor=2",
-		social = "discord",
+		social = "flatpak run com.discordapp.Discord",
 		terminal = "alacritty",
 		files = "nemo",
 		mail = "thunderbird",

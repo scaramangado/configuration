@@ -15,7 +15,7 @@ return {
 		"pgrep keepassxc || keepassxc",
 		-- "nitrogen --set-scaled ~/.config/awesome/wallpapers/pyramids.png || exit 0",
 		"nitrogen --restore || exit 0",
-		"GDK_SCALE=1 GDK_DPI_SCALE=1 pgrep Discord || (sleep 3 && discord)",
+		"GDK_SCALE=1 GDK_DPI_SCALE=1 pgrep discord || (sleep 3 && flatpak run com.discordapp.Discord)",
 		"pgrep thunderbird || thunderbird",
 		"pgrep nextcloud || nextcloud",
 		"pgrep joplin || flatpak run net.cozic.joplin_desktop",
