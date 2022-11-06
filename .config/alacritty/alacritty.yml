@@ -41,7 +41,7 @@ selection:
 
 key_bindings:
   - { key: Numpad0, mods: Control, action: ResetFontSize }
-
+  - { key: Insert, mods: Shift, action: Paste }
 mouse_bindings:
   - { mouse: Middle, action: None }
 
