@@ -3,7 +3,7 @@ monitor = DisplayPort-0
 override-redirect = true
 fixed-center = true
 font-0 = Roboto:size=10:weight=bold;5
-font-1 = Hack NF:size=20;11
+font-1 = JetBrains Mono Nerd Font Mono:size=20;11
 font-2 = Twitter Color Emoji:scale=12;5
 background = #232323
 foreground = #e5e5e5
@@ -24,7 +24,7 @@ monitor = DisplayPort-1
 override-redirect = true
 fixed-center = true
 font-0 = Roboto:size=10:weight=bold;5
-font-1 = Hack NF:size=20;11
+font-1 = JetBrains Mono Nerd Font Mono:size=20;11
 font-2 = Twitter Color Emoji:scale=12;5
 background = #232323
 foreground = #e5e5e5
