@@ -101,6 +101,9 @@ alias vimwiki="vim -c ':VimwikiIndex'"
 export TERMINAL_EMULATOR=$(ps -ho comm -p $(ps -ho ppid -p $$))
 [ $TERMINAL_EMULATOR = 'urxvtd' ] && alias clear="echo -ne '\033c'"
 
+# Fix Prompt and backspace over SSH
+[ $TERMINAL_EMULATOR = 'sshd' ] && export LANG=en_US.utf8 && export TERM=rxvt
+
 # Utils
 eval "$(dircolors ~/.dircolors)"
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
