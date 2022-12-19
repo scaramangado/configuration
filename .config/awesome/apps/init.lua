@@ -12,7 +12,8 @@ local apps_config = {
 		lock = "i3lock -i ~/.config/awesome/wallpapers/pyramids.png && qdbus org.keepassxc.KeePassXC.MainWindow /keepassxc org.keepassxc.MainWindow.lockAllDatabases",
 		password = "keepassxc",
 		calculator = "flatpak run org.kde.kalk",
-		screenshot = "maim -s -u | xclip -selection clipboard -t image/png -i" 
+		notes = "flatpak run net.cozic.joplin_desktop",
+		screenshot = "maim -s -u | xclip -selection clipboard -t image/png -i",
 	},
 	autostart = require("apps.autostart")
 }
@@ -27,6 +28,7 @@ if user_apps then
 	if user_apps.lock then apps_config.default.lock = user_apps.lock end
 	if user_apps.password then apps_config.default.password = user_apps.password end
 	if user_apps.calculator then apps_config.default.calculator = user_apps.calculator end
+	if user_apps.notes then apps_config.default.notes = user_apps.notes end
 	if user_apps.screenshot then apps_config.default.screenshot = user_apps.screenshot end
 end
 

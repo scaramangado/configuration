@@ -6,7 +6,7 @@ config () {
 ### BASE SETUP
 
 bindkey -e
-PATH=~/.scripts:/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
+PATH=/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
 fpath=(~/.config/zsh/completion $fpath)
 
 # Theme

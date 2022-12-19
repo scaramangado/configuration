@@ -415,6 +415,8 @@ globalkeys = gears.table.join(
         { description = "open mail client", group = "launcher" }),
     awful.key({  }, "XF86Calculator", function() awful.spawn(apps.default.calculator) end,
         { description = "open calculator", group = "launcher" }),
+    awful.key({ modkey }, "n", function() awful.spawn(apps.default.notes) end,
+        { description = "open calculator", group = "launcher" }),
 		awful.key({ modkey, "Shift" }, "s", function() awful.util.spawn_with_shell(apps.default.screenshot) end,
         { description = "screenshot", group = "launcher" }),
     awful.key({ modkey, "Control" }, "F5", awesome.restart,
