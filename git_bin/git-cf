@@ -14,7 +14,7 @@ if [[ $branch != "sprint-"* ]] ; then
 	feature=$(echo -n $branch | sed "s/[^\/]*\///")
 else
 	style="2"
-	feature=$(echo -n $branch | awk -F "-" '{print $3}')
+	feature=$(echo -n $branch | awk -F '[-_]' '{print $3}')
 fi
 
 if [[ $style == "1" ]] ; then

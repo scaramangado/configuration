@@ -109,7 +109,7 @@ prompt_git() {
     fi
     if [[ "${ref/.../}" == "$ref" ]]; then
       if [[ $ref == *"sprint-"* ]] ; then
-        ref="$BRANCH $(echo -n $ref | grep -oP '(?<=sprint-\d\d-)\d{6,7}') "
+        ref="$BRANCH $(echo -n $ref | grep -oP '(?<=sprint-\d\d[-_])\d{6,7}') "
       else
         ref="$BRANCH $ref"
       fi
