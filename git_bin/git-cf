@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 
+PREFIX_PATH="$(git rev-parse --show-toplevel)/.git-commit-prefix"
+
+abort() {
+  echo $1
+	exit 1
+}
+
 branch=$(git current-head)
-([[ $branch != "feature/"* ]] || \
-	[[ $branch != "hotfix/"* ]] || \
-	[[ $branch != "sprint-"* ]]) \
-	|| (echo "Not on a feature/hotfix branch" && exit 1)
+[[ ! -f $PREFIX_PATH ]] && ([[ $branch != "feature/"* ]] || [[ $branch != "hotfix/"* ]] || [[ $branch != "sprint-"* ]]) && abort "Not on a feature/hotfix branch"
 
 feature=""
 style="0"
 
-if [[ $branch != "sprint-"* ]] ; then
+if [[ -f $PREFIX_PATH ]] ; then
+	style="1"
+	feature=$(cat $PREFIX_PATH)
+elif [[ $branch != "sprint-"* ]] ; then
 	style="1"
 	feature=$(echo -n $branch | sed "s/[^\/]*\///")
 else

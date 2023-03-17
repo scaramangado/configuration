@@ -6,7 +6,7 @@ config () {
 ### BASE SETUP
 
 bindkey -e
-PATH=/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$PATH
+export PATH=/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$HOME/git_bin:$PATH
 fpath=(~/.config/zsh/completion $fpath)
 
 # Theme
@@ -27,7 +27,17 @@ prompt_dir () {
   prompt_segment blue $PRIMARY_FG ' %c '
 }
 
-AGNOSTER_PROMPT_SEGMENTS=("prompt_context" "prompt_dir" "prompt_virtualenv" "prompt_git" "prompt_status" "prompt_end")
+prompt_git_prefix () {
+
+	local PREFIX_PATH="$(git rev-parse --show-toplevel)/.git-commit-prefix"
+
+  if [[ -f $PREFIX_PATH ]]; then
+		local PREFIX="$(cat $PREFIX_PATH)"
+		prompt_segment white $PRIMARY_FG " $PREFIX "
+	fi;
+}
+
+AGNOSTER_PROMPT_SEGMENTS=("prompt_context" "prompt_dir" "prompt_virtualenv" "prompt_git" "prompt_git_prefix" "prompt_status" "prompt_end")
 
 # Tab completion and auto cd
 
@@ -128,7 +138,6 @@ function vf() {
 
 source ~/.git-flow-completion.zsh
 alias g-="git checkout -"
-export PATH=$HOME/git_bin:$PATH
 
 function repo {
 	cd $(git rev-parse --show-toplevel)

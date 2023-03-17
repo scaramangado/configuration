@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+repo=$(git rev-parse --show-toplevel) || exit 1
+prefix_file="$repo/.git-commit-prefix"
+
+help() {
+	echo "Usage:"
+	echo "git prefix <new prefix>"
+	echo "git prefix -d"
+}
+
+delete() {
+	rm -f $prefix_file
+}
+
+set() {
+	echo -n $1 > $prefix_file
+}
+
+[[ $# != 1 ]] && help && exit 1
+
+case "$1" in
+	-d|--delete) delete ; exit 0 ;;
+	-h|--help) help ; exit 0 ;;
+	*) set $1
+esac
+
