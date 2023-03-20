@@ -96,9 +96,6 @@ prompt_git() {
     test -n "$(git status --porcelain --ignore-submodules)"
   }
   ref="$vcs_info_msg_0_"
-  #if [[ "$ref" == "sprint-"* ]] ; then
-    #ref=$(echo -n "$ref" | awk -F "-" '{printf("%s-%s-%s-...", $1, $2, $3)}')
-  #fi
   if [[ -n "$ref" ]]; then
     if is_dirty; then
       color=yellow

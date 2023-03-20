@@ -29,6 +29,10 @@ prompt_dir () {
 
 prompt_git_prefix () {
 
+	if [[ ! $vcs_info_msg_0_ ]]; then
+		return
+	fi
+
 	local PREFIX_PATH="$(git rev-parse --show-toplevel)/.git-commit-prefix"
 
   if [[ -f $PREFIX_PATH ]]; then
