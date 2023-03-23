@@ -8,7 +8,7 @@ abort() {
 }
 
 branch=$(git current-head)
-[[ ! -f $PREFIX_PATH ]] && ([[ $branch != "feature/"* ]] || [[ $branch != "hotfix/"* ]] || [[ $branch != "sprint-"* ]]) && abort "Not on a feature/hotfix branch"
+[[ ! -f $PREFIX_PATH ]] && [[ $branch != "feature/"* ]] && [[ $branch != "hotfix/"* ]] && [[ $branch != "sprint-"* ]] && abort "Not on a feature/hotfix branch"
 
 feature=""
 style="0"
