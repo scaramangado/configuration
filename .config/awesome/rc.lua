@@ -637,6 +637,7 @@ client.connect_signal("manage", function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     if not awesome.startup
+			and c.class ~= "jetbrains-idea"
 			and c.class ~= "jetbrains-idea-ce"
 			and c.class ~= "jetbrains-pycharm-ce"
 			and c.class ~= "VSCodium" then
