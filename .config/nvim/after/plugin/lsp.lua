@@ -13,7 +13,6 @@ lsp.ensure_installed({
 	'vuels',
 	'tsserver',
 	'eslint',
-	'sumneko_lua',
 	'rust_analyzer',
 })
 

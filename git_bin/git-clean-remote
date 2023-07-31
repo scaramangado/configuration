@@ -1,2 +1,12 @@
+#!/usr/bin/env bash
+
+git branch -r --merged | grep --invert-match -P '.*/(dev|develop|master|main|integration)' | sed 's/.*origin\///' | xargs git push origin --delete --dry-run
+read -rp "Are you sure you want to delete the branches? [y/N]" sure
+case "$sure" in
+	[yY])
+		;;
+	*)
+		exit 0 ;;
+esac
 git branch -r --merged | grep --invert-match -P '.*/(dev|develop|master|main|integration)' | sed 's/.*origin\///' | xargs git push origin --delete
 
