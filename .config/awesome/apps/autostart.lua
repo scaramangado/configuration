@@ -6,7 +6,6 @@ return {
 		"/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1",
 		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1",
 		"nm-applet",
-		"mullvad-vpn",
 	},
 	shell = {
 		"killall picom ; sleep 0.2 ; picom",
@@ -21,6 +20,7 @@ return {
 		"pgrep nextcloud || nextcloud",
 		"pgrep joplin || flatpak run net.cozic.joplin_desktop",
 		"flatpak run com.github.wwmm.easyeffects --gapplication-service",
+		"sleep 1 ; pgrep mullvad-vpn || mullvad-vpn",
 	}
 }
 
