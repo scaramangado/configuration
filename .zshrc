@@ -126,8 +126,8 @@ alias l="ls -lh"
 alias sudo="sudo "
 alias scp="scp -T"
 type batcat >/dev/null 2>&1 && alias bat="batcat"
-alias dcup="sudo docker-compose up -d"
-alias dcdown="sudo docker-compose down"
+alias dcup="docker compose up -d"
+alias dcdown="docker compose down"
 alias yt='yt-dlp -o "%(title)s"'
 
 function ef() {
