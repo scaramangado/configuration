@@ -51,22 +51,9 @@ mods = "Shift"
 action = "None"
 mouse = "Middle"
 
-[schemes.darcula.normal]
-black = "#000000"
-blue = "#5394ec"
-cyan = "#299999"
-green = "#379c1a"
-magenta = "#ae8abe"
-red = "#e74644"
-white = "#eeeeee"
-yellow = "#dcc457"
-
-[schemes.darcula.primary]
-background = "#000000"
-foreground = "#a9b7c6"
-
 [selection]
 save_to_clipboard = true
 
 [window]
 opacity = 0.7
+
