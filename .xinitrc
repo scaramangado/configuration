@@ -31,4 +31,5 @@ fi
 source ~/.xprofile
 exec awesome
 exec /etc/X11/xinit/xinitrc.d/90-xrandr.sh
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
