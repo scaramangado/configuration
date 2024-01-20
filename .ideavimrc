@@ -2,7 +2,7 @@ set ignorecase
 set smartcase
 set scrolloff=10
 set surround
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 set ideajoin
 set multiple-cursors
 set nohlsearch
