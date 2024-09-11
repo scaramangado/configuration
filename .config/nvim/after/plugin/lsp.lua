@@ -1,22 +1,6 @@
 local lsp = require('lsp-zero')
 
-lsp.preset('recommended')
-
-lsp.ensure_installed({
-	'bashls',
-	'cssls',
-	'gradle_ls',
-	'jdtls',
-	'kotlin_language_server',
-	'jsonls',
-	'marksman',
-	'vuels',
-	'tsserver',
-	'eslint',
-	'rust_analyzer',
-})
-
-lsp.on_attach(function(client, bufnr)
+local lsp_attach = function(client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 
 	if client.name == "eslint" then
@@ -34,9 +18,32 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
 	vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-end)
+end
 
-lsp.setup()
+lsp.extend_lspconfig({
+  sign_text = true,
+  lsp_attach = lsp_attach,
+})
+
+require('mason').setup({})
+require('mason-lspconfig').setup({
+  ensure_installed = {
+		'bashls',
+		'gradle_ls',
+		'jdtls',
+		'kotlin_language_server',
+		'jsonls',
+		'marksman',
+		'vuels',
+		'eslint',
+		'rust_analyzer',
+	},
+  handlers = {
+    function(server_name)
+      require('lspconfig')[server_name].setup({})
+    end,
+  }
+})
 
 vim.diagnostic.config({
 	virtual_text = true,
