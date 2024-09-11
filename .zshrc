@@ -7,7 +7,7 @@ config () {
 
 bindkey -e
 export PATH=/usr/local/texlive/2020/bin/x86_64-linux:/usr/bin:/sbin:/usr/sbin:~/.local/bin:$HOME/git_bin:$PATH
-fpath=(~/.config/zsh/completion $fpath)
+fpath=(~/.config/zsh/completion ~/.config/zsh/scripts $fpath)
 
 # Theme
 
@@ -128,7 +128,6 @@ alias scp="scp -T"
 type batcat >/dev/null 2>&1 && alias bat="batcat"
 alias dcup="docker compose up -d"
 alias dcdown="docker compose down"
-alias yt='yt-dlp -o "%(title)s"'
 
 function ef() {
 	$EDITOR $(fdfind --type f | fzf)
@@ -146,6 +145,16 @@ alias g-="git checkout -"
 function repo {
 	cd $(git rev-parse --show-toplevel)
 }
+
+# YouTube
+alias yt='yt-dlp -o "%(title)s"'
+function yt2gif() {
+	yt-dlp -o "%(title)s" --remux-video gif --download-sections "*${2}-${3}" $1
+}
+
+# Private Mode
+
+autoload -Uz private
 
 # TheFuck
 

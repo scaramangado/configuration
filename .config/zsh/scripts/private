@@ -1,0 +1,35 @@
+unset HISTFILE
+
+if typeset -f zsh_hardstatus_precmd > /dev/null && typeset -f title > /dev/null; then
+    autoload -Uz add-zsh-hook
+    add-zsh-hook -d precmd zsh_hardstatus_precmd
+    add-zsh-hook -d preexec zsh_hardstatus_preexec
+
+    function zsh_hardstatus_precmd { title "anonsh" "anonsh"; }
+    add-zsh-hook precmd zsh_hardstatus_precmd
+    add-zsh-hook preexec zsh_hardstatus_precmd
+fi
+
+if (( ${+base_prompt} )); then
+    export base_prompt="${base_prompt//%%1~/...}"
+fi
+export PS1="${PS1//%%1~/...}"
+export PS2="${PS2//%%1~/...}"
+export PS3="${PS3//%%1~/...}"
+export PS4="${PS4//%%1~/...}"
+
+clear() {
+    command clear
+
+    printf '\eP\e[2J\e[3J\e[;H\ec\e\\'
+
+    if [ "$TERM" = "screen" ]; then
+        screen -X scrollback 0
+        screen -X scrollback 5000
+    fi
+}
+
+zshexit() { clear; }
+
+# vim: set ft=zsh :
+
