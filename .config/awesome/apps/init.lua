@@ -2,7 +2,7 @@ local _, user_apps = pcall(require, "apps.default-apps")
 
 local apps_config = {
 	default = {
-		browser = "firefox",
+		browser = "zen-browser",
 		--browser = "brave-browser --force-device-scale-factor=2",
 		social = "flatpak run com.discordapp.Discord",
 		terminal = "alacritty",

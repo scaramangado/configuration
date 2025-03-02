@@ -19,6 +19,7 @@ return {
 		"pgrep thunderbird || thunderbird",
 		"pgrep nextcloud || nextcloud",
 		"pgrep joplin || flatpak run net.cozic.joplin_desktop",
+		"pgrep vorta ||vorta",
 		"flatpak run com.github.wwmm.easyeffects --gapplication-service",
 		"sleep 1 ; pgrep mullvad-vpn || mullvad-vpn",
 	}
